@@ -25,18 +25,17 @@ MonoBehaviour:
         - off: 0
           weight: 1
           operation:
-            rid: 2719749863223853124
+            rid: 2719750088780677188
         - off: 0
           weight: 1
           operation:
-            rid: 2719749863223853125
+            rid: 2719750088780677187
         showDebug: 1
-    - rid: 2719749863223853124
+    - rid: 2719750088780677187
+      type: {class: LoadSaveOperation, ns: Game.Scripts.Infrastructure.Loader, asm: Assembly-CSharp}
+      data: 
+    - rid: 2719750088780677188
       type: {class: LoadSceneOperation, ns: Game.Scripts.Modules.LoadingTree, asm: Assembly-CSharp}
       data:
         sceneName: Menu
         sceneMode: 0
-    - rid: 2719749863223853125
-      type: {class: WaitForSecondsOperation, ns: Game.Scripts.Modules.LoadingTree, asm: Assembly-CSharp}
-      data:
-        seconds: 0.2
