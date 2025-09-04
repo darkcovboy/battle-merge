@@ -18,11 +18,6 @@ namespace Game.Scripts.Modules.Tutorial
             _gameSaveLoader = gameSaveLoader;
         }
 
-        private void Start()
-        {
-            Debug.Log("Tutorial completed " + _tutorial.IsCompleted);
-        }
-
         [Button]
         public void SetCompleteTutorial()
         {

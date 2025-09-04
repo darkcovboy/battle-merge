@@ -24,7 +24,6 @@ namespace Game.Scripts.Modules.SaveLoad
             }
         }
 
-        [Button]
         public void Save(bool isForcePush = false)
         {
             var gameState = new Dictionary<string, string>();
@@ -37,7 +36,6 @@ namespace Game.Scripts.Modules.SaveLoad
             //EccentricInit.Instance.SaveSystem.Save(SaveSystem.PlayerData, isForcePush);
         }
 
-        [Button]
         public void Load()
         {
             Dictionary<string, string> gameState = _repository.GetState();

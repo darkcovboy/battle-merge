@@ -8,7 +8,6 @@ namespace Game.Scripts.Modules.Tutorial
 
         public void Setup(bool isCompleted)
         {
-            Debug.Log("TutorialService.Setup + " + isCompleted);
             IsCompleted = isCompleted;
         }
 
