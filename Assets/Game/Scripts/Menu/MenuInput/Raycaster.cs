@@ -6,8 +6,10 @@ using Zenject;
 
 namespace Game.Scripts.Menu.MenuInput
 {
-    public class Raycaster : IInitializable, IDisposable
+    public class Raycaster : IInitializable, IDisposable, IRaycaster
     {
+        public event Action<Cell, IDraggableCharacter> Dropped;
+
         private readonly IMenuInput _input;
         private readonly Camera _camera;
         private readonly LayerMask _characterLayer;
@@ -15,7 +17,7 @@ namespace Game.Scripts.Menu.MenuInput
         
         private IDraggableCharacter _currentCharacter;
         private Cell _hoverCell;
-
+        
 
         public Raycaster(IMenuInput input, Camera camera)
         {
@@ -53,7 +55,6 @@ namespace Game.Scripts.Menu.MenuInput
                 }
             }
         }
-
         
         private void OnMove(Vector3 screenPos)
         {
@@ -92,6 +93,7 @@ namespace Game.Scripts.Menu.MenuInput
         {
             if (_currentCharacter != null)
             {
+                Dropped?.Invoke(_hoverCell, _currentCharacter);
                 _currentCharacter.OnDrop(_hoverCell);
                 _currentCharacter = null;
             }

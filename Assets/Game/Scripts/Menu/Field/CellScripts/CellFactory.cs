@@ -3,20 +3,20 @@ using Zenject;
 
 namespace Game.Scripts.Menu.Field.CellScripts
 {
-    public class CellFactory : IFactory<Transform,int, CellScripts.Cell>
+    public class CellFactory : IFactory<Transform,int, Cell>
     {
-        private readonly CellScripts.Cell _prefab;
+        private readonly Cell _prefab;
         private readonly CellConfig _config;
 
-        public CellFactory(CellScripts.Cell prefab, CellConfig config)
+        public CellFactory(Cell prefab, CellConfig config)
         {
             _prefab = prefab;
             _config = config;
         }
 
-        public CellScripts.Cell Create(Transform view, int id)
+        public Cell Create(Transform view, int id)
         {
-            CellScripts.Cell cell = Object.Instantiate(_prefab, view);
+            Cell cell = Object.Instantiate(_prefab, view);
             cell.Setup(_config, id);
             return cell;
         }

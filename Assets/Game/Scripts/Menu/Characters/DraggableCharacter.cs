@@ -5,10 +5,14 @@ namespace Game.Scripts.Menu.Characters
 {
     public class DraggableCharacter : MonoBehaviour, IDraggableCharacter
     {
-        public Transform Transform => transform;
+        public string Id { get; set; }
+        public int PositionId { get; set; }
+
+        public bool IsDragging { get; private set; }
 
         public void OnPick()
         {
+            IsDragging = true;
             Debug.Log("Picked character");
         }
 
@@ -19,6 +23,7 @@ namespace Game.Scripts.Menu.Characters
 
         public void OnDrop(Cell targetCell)
         {
+            IsDragging = false;
             if (targetCell != null)
             {
                 transform.position = targetCell.transform.position + Vector3.up * 0.5f;
