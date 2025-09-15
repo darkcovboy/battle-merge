@@ -1,8 +1,8 @@
 ﻿using System;
 using Game.Scripts.Menu.Characters;
 using Game.Scripts.Menu.Field.CellScripts;
-using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Scripts.Menu.MenuInput
 {
@@ -19,6 +19,7 @@ namespace Game.Scripts.Menu.MenuInput
 
         public Raycaster(IMenuInput input, Camera camera)
         {
+            Debug.Log("Constructing Raycaster");
             _input = input;
             _camera = camera;
             

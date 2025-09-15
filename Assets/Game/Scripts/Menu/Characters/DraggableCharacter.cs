@@ -14,7 +14,6 @@ namespace Game.Scripts.Menu.Characters
 
         public void OnDrag(Vector3 worldPos)
         {
-            // Raycaster сам считает worldPos (например пересечение с плоскостью)
             transform.position = new Vector3(worldPos.x, 0.5f, worldPos.z);
         }
 
@@ -23,7 +22,6 @@ namespace Game.Scripts.Menu.Characters
             if (targetCell != null)
             {
                 transform.position = targetCell.transform.position + Vector3.up * 0.5f;
-                Debug.Log("Dropped on cell: " + targetCell.name);
             }
             else
             {
