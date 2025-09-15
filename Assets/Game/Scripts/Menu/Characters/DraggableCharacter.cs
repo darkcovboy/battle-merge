@@ -14,7 +14,7 @@ namespace Game.Scripts.Menu.Characters
 
         public void OnDrag(Vector3 worldPos)
         {
-            transform.position = new Vector3(worldPos.x, 0.5f, worldPos.z);
+            transform.position = new Vector3(worldPos.x, 1.05f, worldPos.z);
         }
 
         public void OnDrop(Cell targetCell)

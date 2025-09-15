@@ -22,7 +22,7 @@ namespace Game.Scripts.Menu.MenuInput
         public void Tick()
         {
             if (Input.GetMouseButtonDown(LeftMouseButtonIndex))
-                Pressed?.Invoke(_camera.ScreenToWorldPoint(Input.mousePosition));
+                Pressed?.Invoke(Input.mousePosition);
 
             if (Input.GetMouseButtonUp(LeftMouseButtonIndex))
                 Released?.Invoke();

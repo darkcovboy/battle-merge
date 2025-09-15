@@ -19,7 +19,6 @@ namespace Game.Scripts.Menu.MenuInput
 
         public Raycaster(IMenuInput input, Camera camera)
         {
-            Debug.Log("Constructing Raycaster");
             _input = input;
             _camera = camera;
             
@@ -29,7 +28,6 @@ namespace Game.Scripts.Menu.MenuInput
         
         public void Initialize()
         {
-            Debug.Log($"Initializing {nameof(Raycaster)}...");
             _input.Pressed += OnPressed;
             _input.Move += OnMove;
             _input.Released += OnReleased;
@@ -44,10 +42,10 @@ namespace Game.Scripts.Menu.MenuInput
         
         private void OnPressed(Vector3 screenPos)
         {
-            Debug.Log("OnPressed");
-            if (Physics.Raycast(_camera.ScreenPointToRay(screenPos), out var hit, 100f, _characterLayer))
+            Debug.Log($"OnPressed: {_characterLayer.value}");
+            if (Physics.Raycast(_camera.ScreenPointToRay(screenPos), out var hit, 1000f, _characterLayer))
             {
-                
+                Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.TryGetComponent(out IDraggableCharacter character))
                 {
                     _currentCharacter = character;
@@ -62,9 +60,17 @@ namespace Game.Scripts.Menu.MenuInput
             if (_currentCharacter == null)
                 return;
 
-            _currentCharacter.OnDrag(screenPos);
+            Ray ray = _camera.ScreenPointToRay(screenPos);
 
-            if (Physics.Raycast(_camera.ScreenPointToRay(screenPos), out var hit, 100f, _cellLayer))
+            Plane plane = new Plane(Vector3.up, new Vector3(0, 1.05f, 0));
+
+            if (plane.Raycast(ray, out float enter))
+            {
+                Vector3 worldPos = ray.GetPoint(enter);
+                _currentCharacter.OnDrag(worldPos);
+            }
+            
+            if (Physics.Raycast(ray, out var hit, 100f, _cellLayer))
             {
                 if (hit.collider.TryGetComponent(out Cell cell))
                 {
