@@ -9,6 +9,8 @@ namespace Game.Scripts.Menu.MenuInput
     public class Raycaster : IInitializable, IDisposable, IRaycaster
     {
         public event Action<Cell, IDraggableCharacter> Dropped;
+        public event Action<Cell, IDraggableCharacter> Hovered;
+        public event Action HoverExited;
 
         private readonly IMenuInput _input;
         private readonly Camera _camera;
@@ -79,13 +81,18 @@ namespace Game.Scripts.Menu.MenuInput
                     {
                         ResetHover();
                         _hoverCell = cell;
-                        _hoverCell.SetPlaceable();
+                        Hovered?.Invoke(cell, _currentCharacter);
                     }
                 }
             }
             else
             {
-                ResetHover();
+                if (_hoverCell != null)
+                {
+                    HoverExited?.Invoke();
+                    _hoverCell = null;
+                }
+
             }
         }
 
@@ -94,7 +101,6 @@ namespace Game.Scripts.Menu.MenuInput
             if (_currentCharacter != null)
             {
                 Dropped?.Invoke(_hoverCell, _currentCharacter);
-                _currentCharacter.OnDrop(_hoverCell);
                 _currentCharacter = null;
             }
 

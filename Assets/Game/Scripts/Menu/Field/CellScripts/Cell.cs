@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ namespace Game.Scripts.Menu.Field.CellScripts
     public class Cell : MonoBehaviour
     {
         [SerializeField] private Image _image;
+        [SerializeField] private TextMeshProUGUI _text;
 
         public int Id { get; private set; }
 
@@ -16,6 +18,7 @@ namespace Game.Scripts.Menu.Field.CellScripts
         {
             Id = id;
             _config = config;
+            _text.text = Id.ToString();
         }
 
         public void SetDefault()   { if (_image) _image.color = _config.DefaultColor; }

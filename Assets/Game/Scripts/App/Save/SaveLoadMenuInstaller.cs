@@ -16,7 +16,8 @@ namespace Game.Scripts.App.Save
             {
                 return new IGameSerializer[]
                 {
-                    context.Container.Instantiate<TutorialSerializer>()
+                    context.Container.Instantiate<TutorialSerializer>(),
+                    context.Container.Instantiate<FieldSerializer>()
                 };
             }).AsSingle();
         }

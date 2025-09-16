@@ -1,7 +1,9 @@
-﻿using Game.Scripts.Menu.Field.CellScripts;
+﻿using DG.Tweening;
+using Game.Scripts.Menu.Characters;
+using Game.Scripts.Menu.Field.CellScripts;
 using UnityEngine;
 
-namespace Game.Scripts.Menu.Characters
+namespace Game.Scripts.App.Characters.Menu
 {
     public class DraggableCharacter : MonoBehaviour, IDraggableCharacter
     {
@@ -9,11 +11,26 @@ namespace Game.Scripts.Menu.Characters
         public int PositionId { get; set; }
 
         public bool IsDragging { get; private set; }
+        public Tweener Appear()
+        {
+            transform.localScale = Vector3.zero;
+            return transform.DOScale(Vector3.one, 0.2f);
+        }
+
+        public Tweener Disappear()
+        {
+            transform.localScale = Vector3.one;
+            return transform.DOScale(Vector3.zero, 0.2f);
+        }
+
+        public void DestroyCharacter()
+        {
+            DestroyImmediate(gameObject);
+        }
 
         public void OnPick()
         {
             IsDragging = true;
-            Debug.Log("Picked character");
         }
 
         public void OnDrag(Vector3 worldPos)
@@ -21,16 +38,21 @@ namespace Game.Scripts.Menu.Characters
             transform.position = new Vector3(worldPos.x, 1.05f, worldPos.z);
         }
 
-        public void OnDrop(Cell targetCell)
+        public void OnDrop(Cell targetCell, bool withAnimation = false)
         {
             IsDragging = false;
-            if (targetCell != null)
+            
+
+            if (withAnimation)
             {
-                transform.position = targetCell.transform.position + Vector3.up * 0.5f;
+                transform.DOMove(targetCell.transform.position, 0.2f);
             }
             else
             {
-                Debug.Log("Dropped outside any cell");
+                if (targetCell != null)
+                {
+                    transform.position = targetCell.transform.position;
+                }
             }
         }
     }
