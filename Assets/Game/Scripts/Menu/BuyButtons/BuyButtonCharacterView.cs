@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Scripts.App.Characters.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -15,6 +16,13 @@ namespace Game.Scripts.Menu.BuyButtons
         
         [SerializeField] 
         private CharacterWarriorType _characterWarriorType;
+        
+        [SerializeField] 
+        private TMP_Text _priceText;
+        
+        
+        public CharacterWarriorType CharacterWarriorType => _characterWarriorType;
+
 
         private void Awake()
         {
@@ -29,6 +37,11 @@ namespace Game.Scripts.Menu.BuyButtons
         private void OnClickButton()
         {
             OnClick?.Invoke(_characterWarriorType);
+        }
+        
+        public void SetInteractable(bool interactable)
+        {
+            _button.interactable = interactable;
         }
     }
 }
