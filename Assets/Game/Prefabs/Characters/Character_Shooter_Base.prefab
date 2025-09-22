@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5128258375560473501}
   - component: {fileID: 5804910900986913015}
   - component: {fileID: 7548593267184375225}
+  - component: {fileID: 998268481019678721}
+  - component: {fileID: -6107152100823903760}
   m_Layer: 6
   m_Name: Character_Shooter_Base
   m_TagString: Untagged
@@ -67,6 +69,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca768cb222b4fc0a6b587845b01e9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _visualEffect: {fileID: 998268481019678721}
+  _outlineHighlighter: {fileID: -6107152100823903760}
+--- !u!114 &998268481019678721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7037671404744499961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8015c6509da6489d9a099f45f8a8e618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectType: 1
+  _intensity: 0.15
+  _duration: 0.4
+--- !u!114 &-6107152100823903760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7037671404744499961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb17a6a2c224ea6b1ac3a90bf6d3452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 0}
+  _highlightColor: {r: 0.14057378, g: 0.8962264, b: 0.07186722, a: 1}
+  _transitionSpeed: 5
 --- !u!1 &8103509879984703005
 GameObject:
   m_ObjectHideFlags: 0

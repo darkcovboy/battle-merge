@@ -182,6 +182,12 @@ namespace Game.Scripts.Menu.Field
             int newCellId = cell.Id;
             int oldCellId = character.PositionId;
             string charId = character.Id;
+
+            if (newCellId == oldCellId)
+            {
+                character.OnDrop(cellCurrentCharacter, false);
+                return; 
+            }
             
             if (string.IsNullOrEmpty(CharacterPositions[newCellId]))
             {
@@ -192,6 +198,7 @@ namespace Game.Scripts.Menu.Field
                 _draggableCharacters[newCellId] = character;
 
                 character.PositionId = newCellId;
+                character.OnDrop(cell, false);
             }
             else if (CanMerge(newCellId, charId))
             {

@@ -7,10 +7,14 @@ namespace Game.Scripts.App.Characters.Menu
 {
     public class DraggableCharacter : MonoBehaviour, IDraggableCharacter
     {
+        [SerializeField] private DragVisualEffect _visualEffect;
+        [SerializeField] private OutlineHighlighter _outlineHighlighter;
         public string Id { get; set; }
         public int PositionId { get; set; }
 
         public bool IsDragging { get; private set; }
+        
+        private Vector3 _lastPos;
         public Tweener Appear()
         {
             transform.localScale = Vector3.zero;
@@ -31,6 +35,8 @@ namespace Game.Scripts.App.Characters.Menu
         public void OnPick()
         {
             IsDragging = true;
+            _outlineHighlighter.EnableHighlight();
+            _visualEffect.OnPick();
         }
 
         public void OnDrag(Vector3 worldPos)
@@ -40,6 +46,8 @@ namespace Game.Scripts.App.Characters.Menu
 
         public void OnDrop(Cell targetCell, bool withAnimation = false)
         {
+            _outlineHighlighter.DisableHighlight();
+            _visualEffect.OnDrop();
             IsDragging = false;
             
 
