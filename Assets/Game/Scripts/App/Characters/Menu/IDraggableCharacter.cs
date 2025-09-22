@@ -1,12 +1,13 @@
 ﻿using DG.Tweening;
+using Game.Scripts.App.Characters.Data;
 using Game.Scripts.Menu.Field.CellScripts;
 using UnityEngine;
 
-namespace Game.Scripts.Menu.Characters
+namespace Game.Scripts.App.Characters.Menu
 {
     public interface IDraggableCharacter
     {
-        string Id { get; set; }
+        CharacterConfig Config { get; set; }
         int PositionId { get; set; }
         bool IsDragging { get; }
         Tweener Appear();

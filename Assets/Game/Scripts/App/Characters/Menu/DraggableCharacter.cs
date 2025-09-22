@@ -1,5 +1,5 @@
 ﻿using DG.Tweening;
-using Game.Scripts.Menu.Characters;
+using Game.Scripts.App.Characters.Data;
 using Game.Scripts.Menu.Field.CellScripts;
 using UnityEngine;
 
@@ -9,7 +9,8 @@ namespace Game.Scripts.App.Characters.Menu
     {
         [SerializeField] private DragVisualEffect _visualEffect;
         [SerializeField] private OutlineHighlighter _outlineHighlighter;
-        public string Id { get; set; }
+        
+        public CharacterConfig Config { get; set; }
         public int PositionId { get; set; }
 
         public bool IsDragging { get; private set; }

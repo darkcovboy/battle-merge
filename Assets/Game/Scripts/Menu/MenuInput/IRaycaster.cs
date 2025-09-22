@@ -1,5 +1,5 @@
 ﻿using System;
-using Game.Scripts.Menu.Characters;
+using Game.Scripts.App.Characters.Menu;
 using Game.Scripts.Menu.Field.CellScripts;
 
 namespace Game.Scripts.Menu.MenuInput

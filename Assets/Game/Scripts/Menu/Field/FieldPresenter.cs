@@ -4,7 +4,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Scripts.App.Characters.Data;
-using Game.Scripts.Menu.Characters;
+using Game.Scripts.App.Characters.Menu;
 using Game.Scripts.Menu.Field.CellScripts;
 using Game.Scripts.Menu.MenuInput;
 using Game.Scripts.Modules.SaveLoad;
@@ -116,7 +116,7 @@ namespace Game.Scripts.Menu.Field
             _draggableCharacters[cellId] = draggable;
             CharacterPositions[cellId] = nameId;
             draggable.PositionId = cellId;
-            draggable.Id = nameId;
+            draggable.Config = characterConfig;
         }
 
         private async void CreateCharacters()
@@ -141,7 +141,7 @@ namespace Game.Scripts.Menu.Field
             if (string.IsNullOrEmpty(CharacterPositions[cellId]))
                 return true;
 
-            if (CanMerge(cellId, character.Id))
+            if (CanMerge(cellId, character.Config.NameId))
                 return true;
             
             return false;
@@ -181,7 +181,7 @@ namespace Game.Scripts.Menu.Field
 
             int newCellId = cell.Id;
             int oldCellId = character.PositionId;
-            string charId = character.Id;
+            string charId = character.Config.NameId;
 
             if (newCellId == oldCellId)
             {
@@ -200,9 +200,9 @@ namespace Game.Scripts.Menu.Field
                 character.PositionId = newCellId;
                 character.OnDrop(cell, false);
             }
-            else if (CanMerge(newCellId, charId))
+            else if (CanMerge(newCellId, charId, out var nextConfig))
             {
-                MergeCharacters(cell,character, _draggableCharacters[newCellId],"shooter_2");
+                MergeCharacters(cell,character, _draggableCharacters[newCellId],nextConfig.NameId);
             }
             else
             {
@@ -223,14 +223,31 @@ namespace Game.Scripts.Menu.Field
                 charA.DestroyCharacter();
                 charB.DestroyCharacter();
 
+                CharacterPositions[charA.PositionId] = string.Empty;
                 CharacterPositions[cell.Id] = string.Empty;
                 _draggableCharacters.Remove(cell.Id);
+                _draggableCharacters.Remove(charA.PositionId);
 
                 AddCharacter(newCharId, cell.Id);
             });
         }
 
-        private bool CanMerge(int id, string characterId) => CharacterPositions[id].Equals(characterId);
+        private bool CanMerge(int id, string characterId, out CharacterConfig nextConfig)
+        {
+            nextConfig = null;
+
+            if (CharacterPositions[id].Equals(characterId))
+            {
+                nextConfig = _characterConfigCatalog.GetNext(_draggableCharacters[id].Config);
+                return nextConfig != null;
+            }
+
+            return false;
+        }
+
+        private bool CanMerge(int id, string characterId) =>
+            _characterConfigCatalog.GetNext(_draggableCharacters[id].Config) != null &&
+            CharacterPositions[id].Equals(characterId);
     }
 
     public interface IFieldPresenter

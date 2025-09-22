@@ -13,6 +13,7 @@ namespace Game.Scripts.App.Characters.Data
 
         public override void InstallBindings()
         {
+            _characterConfigCatalog.Init();
             Container.Bind<CharacterConfigCatalog>().FromInstance(_characterConfigCatalog).AsSingle();
         }
     }
