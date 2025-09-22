@@ -478,15 +478,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5032906459330735337, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -260.7905
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5032906459330735337, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.74214405
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5032906459330735337, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.1193964
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5032906459330735337, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -494,15 +494,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5032906459330735337, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5032906459330735337, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5032906459330735337, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5032906459330735337, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5662055450650949203, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_Name
-      value: Cat Lightning Variant
+      value: Cat2
       objectReference: {fileID: 0}
     - target: {fileID: 6148397257538307288, guid: 76e894dd1d7d918418a201eb6e9d6a6d, type: 3}
       propertyPath: m_LocalScale.x

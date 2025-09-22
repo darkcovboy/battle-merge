@@ -10,19 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4238509924709601431, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_Name
-      value: Blossom Variant
+      value: Bloom3
       objectReference: {fileID: 0}
     - target: {fileID: 4238509924710026423, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -260.7905
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4238509924710026423, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.74214405
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4238509924710026423, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.8806036
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4238509924710026423, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4238509924710026423, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4238509924710026423, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4238509924710026423, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4238509924710026423, guid: f63c07a5cf11fc24ab3fbe7d2b76943e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

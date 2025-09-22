@@ -246,15 +246,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2423738762435110540, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -263.7905
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2423738762435110540, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.74214405
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2423738762435110540, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.1193964
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2423738762435110540, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -262,15 +262,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2423738762435110540, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2423738762435110540, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2423738762435110540, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2423738762435110540, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3092012774649920566, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_Name
-      value: Cat Meow Variant
+      value: Cat1
       objectReference: {fileID: 0}
     - target: {fileID: 3193820535179238275, guid: ededa38da15e9b04e844a5349fe434a8, type: 3}
       propertyPath: m_LocalScale.y
