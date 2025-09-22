@@ -1,4 +1,5 @@
 ﻿using Game.Scripts.App.Save.Serializers;
+using Game.Scripts.Modules.Currency;
 using Game.Scripts.Modules.SaveLoad;
 using Game.Scripts.Modules.SaveLoad.Serializers;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Game.Scripts.App.Save
             {
                 return new IGameSerializer[]
                 {
+                    context.Container.Instantiate<CurrencyBankSerializer>(),
                     context.Container.Instantiate<TutorialSerializer>(),
                     context.Container.Instantiate<FieldSerializer>()
                 };

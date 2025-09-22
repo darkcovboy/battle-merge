@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Game.Scripts.Modules.Currency
 {
+    [Serializable]
     public class CurrencyCell
     {
         public event Action OnStateChanged;
@@ -13,10 +14,6 @@ namespace Game.Scripts.Modules.Currency
 
         public CurrencyType Type => _type;
         public float Amount => _amount;
-        public Sprite Icon => _icon;
-
-        [SerializeField]
-        private Sprite _icon;
 
         [SerializeField]
         private CurrencyType _type;
@@ -103,6 +100,16 @@ namespace Game.Scripts.Modules.Currency
             OnStateChanged?.Invoke();
             OnRemove?.Invoke(range);
             return true;
+        }
+
+        public void Change(float amount)
+        {
+            if (_amount != amount)
+            {
+                _amount = amount;
+                OnAmountChanged?.Invoke(amount);
+                OnStateChanged?.Invoke();
+            }
         }
 
         public bool Exists(int range)
