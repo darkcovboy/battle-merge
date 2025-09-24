@@ -1,4 +1,5 @@
-﻿using Game.Scripts.App.Save;
+﻿using Game.Scripts.App.Characters.Fabric;
+using Game.Scripts.App.Save;
 using Game.Scripts.Menu.Field.CellScripts;
 using UnityEngine;
 using Zenject;
@@ -16,6 +17,8 @@ namespace Game.Scripts.Menu.Field
             Container.Bind<FieldView>().FromInstance(_fieldView).AsSingle();
             Container.Bind<CellConfig>().FromInstance(cellConfig).AsSingle();
             Container.Bind<Cell>().FromInstance(cellPrefab).AsSingle();
+
+            Container.Bind<CharacterMenuFactory>().AsSingle();
             
             Container.Bind<CellFactory>().AsSingle();
             

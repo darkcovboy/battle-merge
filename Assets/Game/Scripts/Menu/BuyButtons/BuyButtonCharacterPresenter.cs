@@ -29,6 +29,7 @@ namespace Game.Scripts.Menu.BuyButtons
             foreach (var view in _views) view.OnClick += OnButtonClicked;
 
             _moneyCell.OnStateChanged += RefreshButtons;
+            _fieldPresenter.OnStateChanged += RefreshButtons;
             RefreshButtons();
         }
 
@@ -40,6 +41,7 @@ namespace Game.Scripts.Menu.BuyButtons
             }
             
             _moneyCell.OnStateChanged -= RefreshButtons;
+            _fieldPresenter.OnStateChanged -= RefreshButtons;
         }
         
         private void RefreshButtons()
@@ -47,7 +49,7 @@ namespace Game.Scripts.Menu.BuyButtons
             foreach (var view in _views)
             {
                 int price = GetPrice(view.CharacterWarriorType);
-                bool canAfford = _moneyCell.Exists(price);
+                bool canAfford = _moneyCell.Exists(price) || _fieldPresenter.IsBoardFull();
                 
                 view.SetInteractable(canAfford);
             }

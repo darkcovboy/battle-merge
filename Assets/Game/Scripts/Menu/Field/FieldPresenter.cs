@@ -4,6 +4,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Scripts.App.Characters.Data;
+using Game.Scripts.App.Characters.Fabric;
 using Game.Scripts.App.Characters.Menu;
 using Game.Scripts.Menu.Field.CellScripts;
 using Game.Scripts.Menu.MenuInput;
@@ -21,12 +22,14 @@ namespace Game.Scripts.Menu.Field
         private readonly IRaycaster _raycaster;
         private readonly CharacterConfigCatalog _characterConfigCatalog;
         private readonly Field _field;
+        private readonly CharacterMenuFactory _factory;
         private readonly GameSaveLoader _gameSaveLoader;
         private readonly List<Cell> _cellViews = new List<Cell>();
         private readonly Dictionary<int, IDraggableCharacter> _draggableCharacters = new Dictionary<int, IDraggableCharacter>();
         private IDictionary<int, string> CharacterPositions => _field.CharacterPositions;
         
         private Cell _lastHoveredCell;
+        private bool _isBoardFull;
 
 
         public FieldPresenter(FieldView fieldView,
@@ -34,6 +37,7 @@ namespace Game.Scripts.Menu.Field
             IRaycaster raycaster,
             CharacterConfigCatalog characterConfigCatalog,
             Field field,
+            CharacterMenuFactory factory,
             GameSaveLoader gameSaveLoader)
         {
             _fieldView = fieldView;
@@ -41,6 +45,7 @@ namespace Game.Scripts.Menu.Field
             _raycaster = raycaster;
             _characterConfigCatalog = characterConfigCatalog;
             _field = field;
+            _factory = factory;
             _gameSaveLoader = gameSaveLoader;
         }
 
@@ -66,17 +71,18 @@ namespace Game.Scripts.Menu.Field
             _raycaster.HoverExited -= OnHoverExited;
         }
 
+        public bool IsBoardFull() => CharacterPositions.All(kvp => !string.IsNullOrEmpty(kvp.Value));
+
+        public event Action OnStateChanged;
+
         public void AddCharacter(string nameId, int cellId = -1)
         {
-            CharacterConfig characterConfig = _characterConfigCatalog.CharacterConfigs
-                .FirstOrDefault(c => c.NameId == nameId);
-
-            if (characterConfig == null)
+            if (IsBoardFull())
             {
-                Debug.LogError($"CharacterConfig not found for nameId: {nameId}");
+                Debug.LogWarning("Board is full");
                 return;
             }
-
+            
             if (cellId == -1)
             {
                 cellId = CharacterPositions
@@ -98,25 +104,13 @@ namespace Game.Scripts.Menu.Field
             
             Cell cell = _cellViews[cellId];
 
-            GameObject instance = Object.Instantiate(
-                characterConfig.ItemReference,
-                cell.transform.position,
-                Quaternion.identity,
-                null
-            );
-
-            if (!instance.TryGetComponent<IDraggableCharacter>(out var draggable))
-            {
-                Debug.LogError($"ItemReference for {nameId} has no IDraggableCharacter component!");
-                Object.Destroy(instance);
-                return;
-            }
+            IDraggableCharacter draggable = _factory.Create(cell.transform.position, nameId);
 
             draggable.Appear();
             _draggableCharacters[cellId] = draggable;
             CharacterPositions[cellId] = nameId;
             draggable.PositionId = cellId;
-            draggable.Config = characterConfig;
+            OnStateChanged?.Invoke();
         }
 
         private async void CreateCharacters()
@@ -252,6 +246,8 @@ namespace Game.Scripts.Menu.Field
 
     public interface IFieldPresenter
     {
+        event Action OnStateChanged;
         void AddCharacter(string nameId, int cellId = -1);
+        bool IsBoardFull();
     }
 }
