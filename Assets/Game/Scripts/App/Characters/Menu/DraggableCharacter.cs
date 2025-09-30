@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Game.Scripts.App.Characters.Data;
 using Game.Scripts.Menu.Field.CellScripts;
 using UnityEngine;
@@ -7,9 +8,8 @@ namespace Game.Scripts.App.Characters.Menu
 {
     public class DraggableCharacter : MonoBehaviour, IDraggableCharacter
     {
-        [SerializeField] private DragVisualEffect _visualEffect;
-        [SerializeField] private OutlineHighlighter _outlineHighlighter;
-        
+        public event Action OnPickCharacter;
+        public event Action OnDropCharacter;
         public CharacterConfig Config { get; set; }
         public int PositionId { get; set; }
 
@@ -36,8 +36,7 @@ namespace Game.Scripts.App.Characters.Menu
         public void OnPick()
         {
             IsDragging = true;
-            _outlineHighlighter.EnableHighlight();
-            _visualEffect.OnPick();
+            OnPickCharacter?.Invoke();
         }
 
         public void OnDrag(Vector3 worldPos)
@@ -47,8 +46,7 @@ namespace Game.Scripts.App.Characters.Menu
 
         public void OnDrop(Cell targetCell, bool withAnimation = false)
         {
-            _outlineHighlighter.DisableHighlight();
-            _visualEffect.OnDrop();
+            OnDropCharacter?.Invoke();
             IsDragging = false;
             
 

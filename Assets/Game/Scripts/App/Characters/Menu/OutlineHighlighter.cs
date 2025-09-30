@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Game.Scripts.App.Characters.Menu
@@ -6,6 +7,7 @@ namespace Game.Scripts.App.Characters.Menu
     public class OutlineHighlighter : MonoBehaviour
     {
         [SerializeField] private SkinnedMeshRenderer _renderer;
+        [SerializeField] private DraggableCharacter _draggableCharacter;
 
         [SerializeField] private Color _highlightColor = Color.yellow;
         [SerializeField] private float _transitionSpeed = 5f;
@@ -30,10 +32,25 @@ namespace Game.Scripts.App.Characters.Menu
 #if UNITY_EDITOR
         private void OnValidate()
         {
+            if (_draggableCharacter == null)
+                _draggableCharacter = GetComponent<DraggableCharacter>();
+            
             if (_renderer == null)
                 _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         }
 #endif
+
+        private void OnEnable()
+        {
+            _draggableCharacter.OnPickCharacter += EnableHighlight;
+            _draggableCharacter.OnDropCharacter += DisableHighlight;
+        }
+
+        private void OnDisable()
+        {
+            _draggableCharacter.OnPickCharacter -= EnableHighlight;
+            _draggableCharacter.OnDropCharacter -= DisableHighlight;
+        }
 
         public void EnableHighlight()
         {

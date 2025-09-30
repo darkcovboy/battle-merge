@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Game.Scripts.Modules.Currency;
 using Game.Scripts.Modules.SaveLoad;
 using TMPro;
@@ -39,8 +40,8 @@ namespace Game.Scripts.Menu.MoveyView
 
         private void OnMoneyChanged(float money)
         {
-            _coinText.text = _coinCurrency.Amount.ToString();
-            _diamondText.text = _diamondCurrency.Amount.ToString();
+            _coinText.text = _coinCurrency.Amount.ToString(CultureInfo.CurrentCulture);
+            _diamondText.text = _diamondCurrency.Amount.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

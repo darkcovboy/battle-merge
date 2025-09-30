@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1629373635939656740}
   - component: {fileID: 5987329607771169162}
   - component: {fileID: 8434717093787359221}
+  - component: {fileID: 226496229473052287}
   m_Layer: 6
   m_Name: Character_Figther_Base
   m_TagString: Untagged
@@ -69,8 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca768cb222b4fc0a6b587845b01e9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _visualEffect: {fileID: 5987329607771169162}
-  _outlineHighlighter: {fileID: 8434717093787359221}
 --- !u!114 &5987329607771169162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8015c6509da6489d9a099f45f8a8e618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _draggableCharacter: {fileID: -1629373635939656740}
   _effectType: 1
   _intensity: 0.15
   _duration: 0.4
@@ -99,8 +99,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 0}
+  _draggableCharacter: {fileID: -1629373635939656740}
   _highlightColor: {r: 0.127759, g: 0.8207547, b: 0.15655589, a: 1}
   _transitionSpeed: 5
+--- !u!114 &226496229473052287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7037671404744499961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c0a5a5788b46fb946418fccd7cf1f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _draggableCharacter: {fileID: -1629373635939656740}
+  _trailCharacter: []
 --- !u!1 &8103509879984703005
 GameObject:
   m_ObjectHideFlags: 0
