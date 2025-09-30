@@ -49,7 +49,7 @@ namespace Game.Scripts.Menu.BuyButtons
             foreach (var view in _views)
             {
                 int price = GetPrice(view.CharacterWarriorType);
-                bool canAfford = _moneyCell.Exists(price) || _fieldPresenter.IsBoardFull();
+                bool canAfford = _moneyCell.Exists(price) || !_fieldPresenter.IsBoardFull();
                 
                 view.SetInteractable(canAfford);
             }
@@ -60,21 +60,18 @@ namespace Game.Scripts.Menu.BuyButtons
         {
             int price = GetPrice(characterWarriorType);
 
-            if (_moneyCell.Exists(price))
+            if (_moneyCell.Spend(price))
             {
-                if (_moneyCell.Spend(price))
+                switch (characterWarriorType)
                 {
-                    switch (characterWarriorType)
-                    {
-                        case CharacterWarriorType.Fighter:
-                            _fieldPresenter.AddCharacter("fighter_1");
-                            break;
-                        case CharacterWarriorType.Shooter:
-                            _fieldPresenter.AddCharacter("shooter_1");
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                    case CharacterWarriorType.Fighter:
+                        _fieldPresenter.AddCharacter("fighter_1");
+                        break;
+                    case CharacterWarriorType.Shooter:
+                        _fieldPresenter.AddCharacter("shooter_1");
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
