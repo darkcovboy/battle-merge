@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: shooter_2 CharacterConfig
   m_EditorClassIdentifier: 
   _nameId: shooter_2
-  _icon: {fileID: 0}
-  _damage: 250
-  _health: 150
+  _icon: {fileID: 21300000, guid: 82a22e979b212a54aa73157d31f7d3af, type: 3}
+  _damage: 5
+  _health: 50
   _itemReference: {fileID: 3087740360633404718, guid: 0ae4da9739cf735479c45166cd9b41de, type: 3}
   _warriorType: 1

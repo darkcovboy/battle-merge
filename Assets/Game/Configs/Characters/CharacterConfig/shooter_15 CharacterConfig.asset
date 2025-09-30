@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d365b5c646304141986d08983c50b5db, type: 3}
-  m_Name: fighter_1 CharacterConfig
+  m_Name: shooter_15 CharacterConfig
   m_EditorClassIdentifier: 
-  _nameId: fighter_1
-  _icon: {fileID: 21300000, guid: aee564d6797d5ef49a5630ac3c165e67, type: 3}
-  _damage: 3
-  _health: 30
-  _itemReference: {fileID: 1171603894650627215, guid: fdb476bab854509458ba6f8fa5e38031, type: 3}
-  _warriorType: 0
+  _nameId: shooter_15
+  _icon: {fileID: 21300000, guid: c049de2a1430f964bb8e191c0e7489dd, type: 3}
+  _damage: 42000
+  _health: 420000
+  _itemReference: {fileID: 1329171736194689704, guid: 93c2fb81d8f11074a9cc15a34d635d3d, type: 3}
+  _warriorType: 1
