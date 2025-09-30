@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Scripts.App.Characters.Menu;
 using Game.Scripts.Menu.Field.CellScripts;
+using Game.Scripts.Menu.Trash;
 using UnityEngine;
 using Zenject;
 
@@ -10,16 +11,18 @@ namespace Game.Scripts.Menu.MenuInput
     {
         public event Action<Cell, IDraggableCharacter> Dropped;
         public event Action<Cell, IDraggableCharacter> Hovered;
+        public event Action<IDraggableCharacter> OnTrash;
         public event Action HoverExited;
 
         private readonly IMenuInput _input;
         private readonly Camera _camera;
         private readonly LayerMask _characterLayer;
         private readonly LayerMask _cellLayer;
-        
+        private readonly int _trashLayer;
+
         private IDraggableCharacter _currentCharacter;
         private Cell _hoverCell;
-        
+
 
         public Raycaster(IMenuInput input, Camera camera)
         {
@@ -28,6 +31,7 @@ namespace Game.Scripts.Menu.MenuInput
             
             _characterLayer = LayerMask.GetMask("DraggableCharacter");
             _cellLayer = LayerMask.GetMask("Cell");
+            _trashLayer = LayerMask.GetMask("Trash");
         }
         
         public void Initialize()
@@ -92,7 +96,14 @@ namespace Game.Scripts.Menu.MenuInput
                     HoverExited?.Invoke();
                     _hoverCell = null;
                 }
+            }
 
+            if (Physics.Raycast(ray, out hit, 100f, _trashLayer))
+            {
+                if (hit.collider.TryGetComponent(out ITrash _))
+                {
+                    OnTrash?.Invoke(_currentCharacter);
+                }
             }
         }
 

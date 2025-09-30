@@ -7,6 +7,8 @@ namespace Game.Scripts.App.Characters.Data
     [CreateAssetMenu(fileName = "CharacterConfigCatalog", menuName = "Configs/CharacterConfigCatalog")]
     public class CharacterConfigCatalog : ScriptableObject
     {
+        private const int Price = 100;
+        
         [SerializeField] private List<CharacterConfig> _characterConfigs;
         
         public List<CharacterConfig> CharacterConfigs => _characterConfigs;
@@ -35,6 +37,19 @@ namespace Game.Scripts.App.Characters.Data
                 return line[index + 1];
 
             return null;
+        }
+
+        public int GetPrice(CharacterConfig current)
+        {
+            var line = _lines[current.WarriorType];
+            int index = line.IndexOf(current);
+        
+            if (index >= 0)
+            {
+                return Price * (int)Mathf.Pow(2, index);
+            }
+        
+            return Price;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Game.Scripts.Menu.MenuInput
     {
         event Action<Cell, IDraggableCharacter> Dropped;
         event Action<Cell, IDraggableCharacter> Hovered;
+        event Action<IDraggableCharacter> OnTrash;
         event Action HoverExited;
     }
 }

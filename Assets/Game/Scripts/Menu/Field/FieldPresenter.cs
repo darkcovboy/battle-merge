@@ -8,6 +8,7 @@ using Game.Scripts.App.Characters.Fabric;
 using Game.Scripts.App.Characters.Menu;
 using Game.Scripts.Menu.Field.CellScripts;
 using Game.Scripts.Menu.MenuInput;
+using Game.Scripts.Modules.Currency;
 using Game.Scripts.Modules.SaveLoad;
 using UnityEngine;
 using Zenject;
@@ -23,6 +24,7 @@ namespace Game.Scripts.Menu.Field
         private readonly CharacterConfigCatalog _characterConfigCatalog;
         private readonly Field _field;
         private readonly CharacterMenuFactory _factory;
+        private readonly CurrencyCell _moneyCell;
         private readonly GameSaveLoader _gameSaveLoader;
         private readonly List<Cell> _cellViews = new List<Cell>();
         private readonly Dictionary<int, IDraggableCharacter> _draggableCharacters = new Dictionary<int, IDraggableCharacter>();
@@ -38,7 +40,8 @@ namespace Game.Scripts.Menu.Field
             CharacterConfigCatalog characterConfigCatalog,
             Field field,
             CharacterMenuFactory factory,
-            GameSaveLoader gameSaveLoader)
+            GameSaveLoader gameSaveLoader,
+            CurrencyBank currencyBank)
         {
             _fieldView = fieldView;
             _cellFactory = cellFactory;
@@ -47,6 +50,7 @@ namespace Game.Scripts.Menu.Field
             _field = field;
             _factory = factory;
             _gameSaveLoader = gameSaveLoader;
+            _moneyCell = currencyBank.GetCell(CurrencyType.COIN);
         }
 
         public void Initialize()
@@ -54,6 +58,7 @@ namespace Game.Scripts.Menu.Field
             _raycaster.Dropped += OnCharacterDropped;
             _raycaster.Hovered += OnCharacterHovered;
             _raycaster.HoverExited += OnHoverExited;
+            _raycaster.OnTrash += OnCharacterSell;
             
             for (int i = 0; i < 16; i++)
             {
@@ -61,7 +66,7 @@ namespace Game.Scripts.Menu.Field
                 _cellViews.Add(cell);
             }
 
-            CreateCharacters();
+            CreateCharacters().Forget();
         }
 
         public void Dispose()
@@ -113,7 +118,19 @@ namespace Game.Scripts.Menu.Field
             OnStateChanged?.Invoke();
         }
 
-        private async void CreateCharacters()
+        private void OnCharacterSell(IDraggableCharacter character)
+        {
+            int price = _characterConfigCatalog.GetPrice(character.Config);
+
+            _moneyCell.Add(price);
+            
+            CharacterPositions[character.PositionId] = string.Empty;
+            _draggableCharacters.Remove(character.PositionId);
+            
+            character.DestroyCharacter();
+        }
+
+        private async UniTaskVoid CreateCharacters()
         {
             await UniTask.WaitForSeconds(0.02f);
             for (int i = 0; i < 16; i++)
