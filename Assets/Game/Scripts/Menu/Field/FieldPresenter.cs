@@ -6,6 +6,7 @@ using DG.Tweening;
 using Game.Scripts.App.Characters.Data;
 using Game.Scripts.App.Characters.Fabric;
 using Game.Scripts.App.Characters.Menu;
+using Game.Scripts.Menu.Effects.Particles;
 using Game.Scripts.Menu.Field.CellScripts;
 using Game.Scripts.Menu.MenuInput;
 using Game.Scripts.Modules.Currency;
@@ -26,6 +27,7 @@ namespace Game.Scripts.Menu.Field
         private readonly CharacterMenuFactory _factory;
         private readonly CurrencyCell _moneyCell;
         private readonly GameSaveLoader _gameSaveLoader;
+        private readonly ParticlesManager _particlesManager;
         private readonly List<Cell> _cellViews = new List<Cell>();
         private readonly Dictionary<int, IDraggableCharacter> _draggableCharacters = new Dictionary<int, IDraggableCharacter>();
         private IDictionary<int, string> CharacterPositions => _field.CharacterPositions;
@@ -41,7 +43,8 @@ namespace Game.Scripts.Menu.Field
             Field field,
             CharacterMenuFactory factory,
             GameSaveLoader gameSaveLoader,
-            CurrencyBank currencyBank)
+            CurrencyBank currencyBank,
+            ParticlesManager particlesManager)
         {
             _fieldView = fieldView;
             _cellFactory = cellFactory;
@@ -50,6 +53,7 @@ namespace Game.Scripts.Menu.Field
             _field = field;
             _factory = factory;
             _gameSaveLoader = gameSaveLoader;
+            _particlesManager = particlesManager;
             _moneyCell = currencyBank.GetCell(CurrencyType.COIN);
         }
 
@@ -111,6 +115,7 @@ namespace Game.Scripts.Menu.Field
 
             IDraggableCharacter draggable = _factory.Create(cell.transform.position, nameId);
 
+            _particlesManager.PlayAppearCharacter(cell.transform.position);
             draggable.Appear();
             _draggableCharacters[cellId] = draggable;
             CharacterPositions[cellId] = nameId;
