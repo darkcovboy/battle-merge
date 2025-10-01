@@ -9,6 +9,7 @@ namespace Game.Scripts.Menu.MenuInput
 {
     public class Raycaster : IInitializable, IDisposable, IRaycaster
     {
+        public event Action<IDraggableCharacter> OnPick;
         public event Action<Cell, IDraggableCharacter> Dropped;
         public event Action<Cell, IDraggableCharacter> Hovered;
         public event Action<IDraggableCharacter> OnTrash;
@@ -22,6 +23,7 @@ namespace Game.Scripts.Menu.MenuInput
 
         private IDraggableCharacter _currentCharacter;
         private Cell _hoverCell;
+        private bool _isOverTrash;
 
 
         public Raycaster(IMenuInput input, Camera camera)
@@ -58,6 +60,7 @@ namespace Game.Scripts.Menu.MenuInput
                 {
                     _currentCharacter = character;
                     _currentCharacter.OnPick();
+                    OnPick?.Invoke(_currentCharacter);
                 }
             }
         }
@@ -97,24 +100,38 @@ namespace Game.Scripts.Menu.MenuInput
                     _hoverCell = null;
                 }
             }
-
-            if (Physics.Raycast(ray, out hit, 100f, _trashLayer))
+            
+            _isOverTrash = Physics.Raycast(ray, out hit, 100f, _trashLayer);
+            //Добавить красную обводку, чтобы было понятно, что мы над мусоркой
+            /*
+            bool wasOverTrash = _isOverTrash;
+            _isOverTrash = Physics.Raycast(ray, out hit, 100f, _trashLayer);
+            
+            if (_isOverTrash != wasOverTrash)
             {
-                if (hit.collider.TryGetComponent(out ITrash _))
-                {
-                    OnTrash?.Invoke(_currentCharacter);
-                }
+                _currentCharacter?.SetTrashHighlight(_isOverTrash);
             }
+            */
         }
 
         private void OnReleased()
         {
             if (_currentCharacter != null)
             {
-                Dropped?.Invoke(_hoverCell, _currentCharacter);
+                if (_isOverTrash)
+                {
+                    OnTrash?.Invoke(_currentCharacter);
+                    ResetHover();
+                }
+                else
+                {
+                    Dropped?.Invoke(_hoverCell, _currentCharacter);
+                }
+                
                 _currentCharacter = null;
             }
 
+            _isOverTrash = false;
             ResetHover();
         }
 

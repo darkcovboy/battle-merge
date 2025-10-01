@@ -28,6 +28,7 @@ namespace Game.Scripts.Menu.Field
         private readonly CurrencyCell _moneyCell;
         private readonly GameSaveLoader _gameSaveLoader;
         private readonly ParticlesManager _particlesManager;
+        private readonly IGameEventMediator _gameEventMediator;
         private readonly List<Cell> _cellViews = new List<Cell>();
         private readonly Dictionary<int, IDraggableCharacter> _draggableCharacters = new Dictionary<int, IDraggableCharacter>();
         private IDictionary<int, string> CharacterPositions => _field.CharacterPositions;
@@ -44,7 +45,8 @@ namespace Game.Scripts.Menu.Field
             CharacterMenuFactory factory,
             GameSaveLoader gameSaveLoader,
             CurrencyBank currencyBank,
-            ParticlesManager particlesManager)
+            ParticlesManager particlesManager,
+            IGameEventMediator gameEventMediator)
         {
             _fieldView = fieldView;
             _cellFactory = cellFactory;
@@ -54,6 +56,7 @@ namespace Game.Scripts.Menu.Field
             _factory = factory;
             _gameSaveLoader = gameSaveLoader;
             _particlesManager = particlesManager;
+            _gameEventMediator = gameEventMediator;
             _moneyCell = currencyBank.GetCell(CurrencyType.COIN);
         }
 
@@ -81,7 +84,6 @@ namespace Game.Scripts.Menu.Field
         }
 
         public bool IsBoardFull() => CharacterPositions.All(kvp => !string.IsNullOrEmpty(kvp.Value));
-
         public event Action OnStateChanged;
 
         public void AddCharacter(string nameId, int cellId = -1)
@@ -116,6 +118,7 @@ namespace Game.Scripts.Menu.Field
             IDraggableCharacter draggable = _factory.Create(cell.transform.position, nameId);
 
             _particlesManager.PlayAppearCharacter(cell.transform.position);
+            _gameEventMediator.NotifyCharacterMerged(draggable.Config);
             draggable.Appear();
             _draggableCharacters[cellId] = draggable;
             CharacterPositions[cellId] = nameId;

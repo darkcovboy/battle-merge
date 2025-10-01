@@ -1,4 +1,5 @@
 ﻿using Game.Scripts.App.Save.Serializers;
+using Game.Scripts.Menu.CharacterUnlock;
 using Game.Scripts.Modules.Currency;
 using Game.Scripts.Modules.SaveLoad;
 using Game.Scripts.Modules.SaveLoad.Serializers;
@@ -19,7 +20,8 @@ namespace Game.Scripts.App.Save
                 {
                     context.Container.Instantiate<CurrencyBankSerializer>(),
                     context.Container.Instantiate<TutorialSerializer>(),
-                    context.Container.Instantiate<FieldSerializer>()
+                    context.Container.Instantiate<FieldSerializer>(),
+                    context.Container.Instantiate<CharacterUnlockSerializer>(),
                 };
             }).AsSingle();
         }

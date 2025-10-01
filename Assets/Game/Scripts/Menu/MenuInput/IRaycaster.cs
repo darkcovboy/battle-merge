@@ -6,6 +6,7 @@ namespace Game.Scripts.Menu.MenuInput
 {
     public interface IRaycaster
     {
+        event Action<IDraggableCharacter> OnPick;
         event Action<Cell, IDraggableCharacter> Dropped;
         event Action<Cell, IDraggableCharacter> Hovered;
         event Action<IDraggableCharacter> OnTrash;

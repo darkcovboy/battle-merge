@@ -1,5 +1,6 @@
 ﻿using Game.Scripts.App.Save;
 using Game.Scripts.Menu.BuyButtons;
+using Game.Scripts.Menu.CharacterUnlock;
 using Game.Scripts.Menu.MenuInput;
 using Game.Scripts.Modules.Tutorial;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Game.Scripts.Menu
             Container.BindInterfacesAndSelfTo<TutorialService>().AsSingle();
             Container.BindInterfacesAndSelfTo<Field.Field>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuyButtonCharacterPresenter>().AsSingle().WithArguments(_buyButtonCharacterViews);
+            Container.BindInterfacesAndSelfTo<CharacterUnlockService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameEventMediator>().AsSingle();
             MenuInputInstaller.Install(Container,_mainCamera);
             SaveLoadMenuInstaller.Install(Container);
         }
