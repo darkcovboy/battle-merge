@@ -52,10 +52,8 @@ namespace Game.Scripts.Menu.MenuInput
         
         private void OnPressed(Vector3 screenPos)
         {
-            Debug.Log($"OnPressed: {_characterLayer.value}");
             if (Physics.Raycast(_camera.ScreenPointToRay(screenPos), out var hit, 1000f, _characterLayer))
             {
-                Debug.Log(hit.collider.gameObject.name);
                 if (hit.collider.TryGetComponent(out IDraggableCharacter character))
                 {
                     _currentCharacter = character;

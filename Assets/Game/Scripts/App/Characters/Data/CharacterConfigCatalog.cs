@@ -12,6 +12,7 @@ namespace Game.Scripts.App.Characters.Data
         [SerializeField] private List<CharacterConfig> _characterConfigs;
         
         public List<CharacterConfig> CharacterConfigs => _characterConfigs;
+        public Dictionary<CharacterWarriorType, List<CharacterConfig>> Lines => _lines;
         
         private Dictionary<CharacterWarriorType, List<CharacterConfig>> _lines;
 
