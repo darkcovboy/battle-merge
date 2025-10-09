@@ -1,4 +1,5 @@
 ﻿using Game.Scripts.App.Save;
+using Game.Scripts.Infrastructure.Loader;
 using Game.Scripts.Menu.BuyButtons;
 using Game.Scripts.Menu.CharacterUnlock;
 using Game.Scripts.Menu.MenuInput;
@@ -17,6 +18,7 @@ namespace Game.Scripts.Menu
 
         public override void InstallBindings()
         {
+            Container.Bind<SceneLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<TutorialService>().AsSingle();
             Container.BindInterfacesAndSelfTo<Field.Field>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuyButtonCharacterPresenter>().AsSingle().WithArguments(_buyButtonCharacterViews);

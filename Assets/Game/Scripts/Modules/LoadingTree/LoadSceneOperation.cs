@@ -20,6 +20,8 @@ namespace Game.Scripts.Modules.LoadingTree
 
         public override async UniTask<Result> Run(LoadingBundle bundle)
         {
+            if(SceneManager.GetActiveScene().name == "Gameplay")
+                return Result.Success();
             _operation = SceneManager.LoadSceneAsync(this.sceneName, this.sceneMode);
             await _operation;
             return Result.Success();
