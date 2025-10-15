@@ -29,32 +29,31 @@ namespace Game.Scripts.Battler.Player
             _pokeballPrefab = pokeballPrefab;
             _pokeballSpawnPoint = pokeballSpawnPoint;
             _playerTransform = playerTransform;
-            _pokeballPool = new PokeballPool(pokeballPrefab, _field.CharacterPositions.Values.Count);
-
-
-            InitializeTeam();
+            
+            var activeMonsterIds = _field.CharacterPositions
+                .Values
+                .Where(id => !string.IsNullOrEmpty(id))
+                .ToList();
+            
+            _pokeballPool = new PokeballPool(pokeballPrefab, activeMonsterIds.Count);
+            
+            InitializeTeam(activeMonsterIds);
         }
 
-        private void InitializeTeam()
+        private void InitializeTeam(List<string> activeMonsterIds)
         {
-            var monsters = _field.CharacterPositions.Values.ToList();
-
-            for (int i = 0; i < monsters.Count; i++)
+            foreach (var id in activeMonsterIds)
             {
-                if (!string.IsNullOrEmpty(monsters[i]))
-                {
-                    var monster = _factory.Create(Vector3.zero, monsters[i]);
-                    monster.gameObject.SetActive(false);
-                    _monsters.Add(monster);
-                }
+                var monster = _factory.Create(Vector3.zero, id);
+                monster.gameObject.SetActive(false);
+                _monsters.Add(monster);
             }
         }
 
         public void ThrowPokeballs()
         {
-            for (int i = 0; i < _monsters.Count; i++)
+            foreach (var monster in _monsters)
             {
-                var monster = _monsters[i];
                 if (monster == null) continue;
 
                 Vector3 targetPos = _battleZone.GetRandomPointInside();
@@ -63,12 +62,13 @@ namespace Game.Scripts.Battler.Player
                 pokeball.transform.position = _pokeballSpawnPoint.position;
 
 
+                var monster1 = monster;
                 pokeball.Launch(targetPos,
                     (landPos) =>
                     {
-                        monster.transform.position = landPos;
-                        monster.gameObject.SetActive(true);
-                        monster.ShowWithSpawnAnimation();
+                        monster1.transform.position = landPos;
+                        monster1.gameObject.SetActive(true);
+                        monster1.ShowWithSpawnAnimation();
                     },
                     (ball) => _pokeballPool.Release(ball)
                 );
