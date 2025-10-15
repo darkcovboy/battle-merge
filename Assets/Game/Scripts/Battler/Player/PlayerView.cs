@@ -14,6 +14,7 @@ namespace Game.Scripts.Battler.Player
         [SerializeField] private Animator _animator;
         [SerializeField] private float _speed = 6f;
         [SerializeField] private Transform _pokeballPosition;
+        [SerializeField] private Transform _pokeballModel;
         
         public Transform PokeballPosition => _pokeballPosition;
         
@@ -24,11 +25,13 @@ namespace Game.Scripts.Battler.Player
         
         public void PlayThrow()
         {
+            _pokeballModel.gameObject.SetActive(true);
             _animator.SetTrigger(Throw);
         }
         
         public void OnThrowAnimationFinished()
         {
+            _pokeballModel.gameObject.SetActive(false);
             OnThrowAnimationComplete?.Invoke();
         }
 
