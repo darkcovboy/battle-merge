@@ -20,7 +20,6 @@ namespace Game.Scripts.Menu
         {
             Container.Bind<SceneLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<TutorialService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<Field.Field>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuyButtonCharacterPresenter>().AsSingle().WithArguments(_buyButtonCharacterViews);
             Container.BindInterfacesAndSelfTo<CharacterUnlockService>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameEventMediator>().AsSingle();

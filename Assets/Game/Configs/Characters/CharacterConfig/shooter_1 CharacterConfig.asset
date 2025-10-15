@@ -18,3 +18,7 @@ MonoBehaviour:
   _health: 30
   _itemReference: {fileID: 1759321189540331780, guid: 57725e45b5a48ee429c43f9abfac43ab, type: 3}
   _warriorType: 1
+  _monsterCharacterPrefab: {fileID: 8400682191589501942, guid: e1973a510c6d953499c3b701a3a9ea37, type: 3}
+  _moveSpeed: 4
+  _attackRange: 1.5
+  _attackCooldown: 1

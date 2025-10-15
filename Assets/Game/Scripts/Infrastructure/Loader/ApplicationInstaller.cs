@@ -1,4 +1,5 @@
-﻿using Game.Scripts.Modules.LoadingTree;
+﻿using Game.Scripts.Menu.Field;
+using Game.Scripts.Modules.LoadingTree;
 using UnityEngine;
 using Zenject;
 
@@ -15,6 +16,7 @@ namespace Game.Scripts.Infrastructure.Loader
     
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<Field>().AsSingle();
             this.Container.BindInterfacesAndSelfTo<GameLauncher>()
                 .AsSingle()
                 .WithArguments(_loadingOperation)
