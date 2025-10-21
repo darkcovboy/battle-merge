@@ -16,6 +16,7 @@ namespace Game.Scripts.Battler.Enemies
         [SerializeField] private BattleZone _battleZone;
         [SerializeField] private Pokeball _pokeballPrefab;
         [SerializeField] private Transform _pokeballSpawnPoint;
+        [SerializeField] private TeamStatsView _teamStatsView;
 
         [Header("Team Setup")]
         [SerializeField] private List<string> _monsterIds = new(); // вручную задаём ID монстров
@@ -47,6 +48,7 @@ namespace Game.Scripts.Battler.Enemies
 
             _view.OnThrowAnimationComplete += OnThrowAnimationComplete;
             _stateMachine = new EnemyStateMachine(this, _view);
+            _teamStatsView.Initialize(_teamController);
         }
 
         private void Update()
@@ -65,6 +67,7 @@ namespace Game.Scripts.Battler.Enemies
         public void OnBattleStarted(ICombat opponent)
         {
             _view.PlayThrow();
+            _teamStatsView.gameObject.SetActive(false);
         }
 
         public void OnBattleEnded(bool victory)
@@ -74,6 +77,8 @@ namespace Game.Scripts.Battler.Enemies
                 : EnemyStateMachine.EnemyStateType.Dead);
 
             _teamController.ReturnMonsters();
+            
+            _teamStatsView.gameObject.SetActive(victory);
         }
 
         private void OnThrowAnimationComplete()

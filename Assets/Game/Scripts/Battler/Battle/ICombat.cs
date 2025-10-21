@@ -8,8 +8,8 @@ namespace Game.Scripts.Battler.Battle
     {
         IReadOnlyList<MonsterCharacter> Team { get; }
 
-        Transform Transform { get; }   // добавим для поворота
-        bool IsInBattle { get; set; }  // флаг состояния
+        Transform Transform { get; }
+        bool IsInBattle { get; set; }
 
         void OnBattleStarted(ICombat opponent);
         void OnBattleEnded(bool victory);

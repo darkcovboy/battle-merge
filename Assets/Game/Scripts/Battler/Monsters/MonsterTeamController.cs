@@ -2,12 +2,11 @@
 using System.Linq;
 using DG.Tweening;
 using Game.Scripts.Battler.Battle;
-using Game.Scripts.Battler.Monsters;
 using Game.Scripts.Battler.Player.Pokeballs;
 using Game.Scripts.Menu.Field;
 using UnityEngine;
 
-namespace Game.Scripts.Battler.Player
+namespace Game.Scripts.Battler.Monsters
 {
     public class MonsterTeamController
     {
@@ -103,6 +102,28 @@ namespace Game.Scripts.Battler.Player
                         .OnComplete(() => _pokeballPool.Release(ball));
                 });
             }
+        }
+        
+        public float GetTotalHealth()
+        {
+            float sum = 0;
+            foreach (var m in _monsters)
+            {
+                if (!m.IsDead)
+                    sum += m.CurrentHealth;
+            }
+            return sum;
+        }
+        
+        public float GetTotalAttack()
+        {
+            float sum = 0;
+            foreach (var m in _monsters)
+            {
+                if (!m.IsDead)
+                    sum += m.Attack;
+            }
+            return sum;
         }
     }
 }

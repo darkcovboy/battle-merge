@@ -21,11 +21,12 @@ namespace Game.Scripts.Battler.Monsters
         private Transform _owner;
         
         private Vector3 _originalScale;
-
-
+        
         public bool IsDead => _currentHealth <= 0;
         public CharacterConfig Config => _config;
         public Transform Transform => transform;
+        public float CurrentHealth => _currentHealth;
+        public float Attack => _config.Damage;
 
         private void Awake()
         {

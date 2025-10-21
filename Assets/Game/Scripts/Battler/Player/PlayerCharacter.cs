@@ -17,6 +17,7 @@ namespace Game.Scripts.Battler.Player
         [SerializeField] private PlayerView _view;
         [SerializeField] private BattleZone _battleZone;
         [SerializeField] private Pokeball _pokeballPrefab;
+        [SerializeField] private TeamStatsView _teamStatsView;
         
 
         private IInput _input;
@@ -35,6 +36,7 @@ namespace Game.Scripts.Battler.Player
             _stateMachine = new PlayerStateMachine(_view, _input);
             _teamController = new MonsterTeamController(factory, field, transform, _battleZone, _pokeballPrefab, _view.PokeballPosition);
 
+            _teamStatsView.Initialize(_teamController);
             _view.OnThrowAnimationComplete += OnThrowAnimationComplete;
         }
 
@@ -52,12 +54,14 @@ namespace Game.Scripts.Battler.Player
         {
             _input.SetBlocked(true);
             _view.PlayThrow();
+            _teamStatsView.gameObject.SetActive(false);
         }
 
         public void OnBattleEnded(bool victory)
         {
             _input.SetBlocked(false);
             _teamController.ReturnMonsters();
+            _teamStatsView.gameObject.SetActive(true);
         }
 
         private void OnThrowAnimationComplete()

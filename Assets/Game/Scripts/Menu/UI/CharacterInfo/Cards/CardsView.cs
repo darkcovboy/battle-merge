@@ -53,12 +53,8 @@ namespace Game.Scripts.Menu.UI.CharacterInfo.Cards
         public void Open()
         {
             gameObject.SetActive(true);
-            
-            _rectTransform.DOAnchorPos(_originalPosition, _animationDuration)
-                .OnComplete(() => {
-                    // Дополнительные действия после завершения анимации
-                    Debug.Log("Menu opened!");
-                });
+
+            _rectTransform.DOAnchorPos(_originalPosition, _animationDuration);
         }
 
         private void CalculatePositions()
@@ -87,7 +83,6 @@ namespace Game.Scripts.Menu.UI.CharacterInfo.Cards
             _rectTransform.DOAnchorPos(_hiddenPosition, _animationDuration)
                 .OnComplete(() => {
                     gameObject.SetActive(false);
-                    Debug.Log("Menu closed!");
                 });
         }
     }
