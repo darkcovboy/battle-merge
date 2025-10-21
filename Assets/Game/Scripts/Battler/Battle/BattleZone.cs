@@ -17,6 +17,9 @@ namespace Game.Scripts.Battler.Battle
 #if UNITY_EDITOR
         private void OnValidate()
         {
+            if(_ownerCharacter == null)
+                return;
+            
             if (_ownerCharacter is ICombat) return;
             Debug.LogError($"{nameof(_ownerCharacter)} is not a Combat");
             _ownerCharacter = null;

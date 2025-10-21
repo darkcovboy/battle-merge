@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Scripts.Battler.Monsters;
+using UnityEngine;
 
 namespace Game.Scripts.Battler.Battle
 {
@@ -26,6 +27,11 @@ namespace Game.Scripts.Battler.Battle
         {
             _active = true;
 
+            _teamA.IsInBattle = true;
+            _teamB.IsInBattle = true;
+
+            LookAtEachOther();
+            
             _teamA.OnBattleStarted(_teamB);
             _teamB.OnBattleStarted(_teamA);
 
@@ -33,6 +39,14 @@ namespace Game.Scripts.Battler.Battle
                 m.OnDeath += OnMonsterDeath;
 
             AssignTargets();
+        }
+
+        private void LookAtEachOther()
+        {
+            Vector3 dir = (_teamB.Transform.position - _teamA.Transform.position).normalized;
+
+            _teamA.Transform.rotation = Quaternion.LookRotation(dir);
+            _teamB.Transform.rotation = Quaternion.LookRotation(-dir);
         }
 
         private void AssignTargets()
@@ -69,6 +83,9 @@ namespace Game.Scripts.Battler.Battle
 
             foreach (var m in _teamA.Team.Concat(_teamB.Team))
                 m.OnDeath -= OnMonsterDeath;
+            
+            _teamA.IsInBattle = false;
+            _teamB.IsInBattle = false;
 
             _teamA.OnBattleEnded(winner == _teamA);
             _teamB.OnBattleEnded(winner == _teamB);

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Scripts.Battler.Battle;
+using Game.Scripts.Battler.Enemies.StateMachine;
 using Game.Scripts.Battler.Monsters;
 using Game.Scripts.Battler.Player;
 using Game.Scripts.Battler.Player.Pokeballs;
@@ -20,14 +22,18 @@ namespace Game.Scripts.Battler.Enemies
 
         private MonsterTeamController _teamController;
         private MonsterFactory _factory;
+        private EnemyStateMachine _stateMachine;
 
         public IReadOnlyList<MonsterCharacter> Team => _teamController.Monsters;
+        public Transform Transform => transform;
+        public bool IsInBattle { get; set; }
 
         [Inject]
         public void Construct(MonsterFactory factory)
         {
             _factory = factory;
         }
+        
         private void Awake()
         {
             _teamController = new MonsterTeamController(
@@ -40,6 +46,15 @@ namespace Game.Scripts.Battler.Enemies
             );
 
             _view.OnThrowAnimationComplete += OnThrowAnimationComplete;
+            _stateMachine = new EnemyStateMachine(this, _view);
+        }
+
+        private void Update()
+        {
+            if (IsInBattle)
+                _view.SetIdle();
+            else
+                _stateMachine.Update();
         }
 
         private void OnDestroy()
@@ -49,12 +64,15 @@ namespace Game.Scripts.Battler.Enemies
 
         public void OnBattleStarted(ICombat opponent)
         {
-            // у врага тоже проигрываем анимацию броска
             _view.PlayThrow();
         }
 
         public void OnBattleEnded(bool victory)
         {
+            _stateMachine.ChangeState(victory
+                ? EnemyStateMachine.EnemyStateType.Victory
+                : EnemyStateMachine.EnemyStateType.Dead);
+
             _teamController.ReturnMonsters();
         }
 

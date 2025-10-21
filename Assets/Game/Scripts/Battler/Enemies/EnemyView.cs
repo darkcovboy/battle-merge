@@ -5,7 +5,10 @@ namespace Game.Scripts.Battler.Enemies
 {
     public class EnemyView : MonoBehaviour
     {
+        private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Throw = Animator.StringToHash("Throw");
+        private static readonly int Die = Animator.StringToHash("Die");
+        private static readonly int Win = Animator.StringToHash("Win");
 
         [SerializeField] private Animator _animator;
         [field: SerializeField] public Transform PokeballPosition { get; private set; }
@@ -20,15 +23,12 @@ namespace Game.Scripts.Battler.Enemies
         }
 #endif
 
-        public void PlayThrow()
-        {
-            _animator.SetTrigger(Throw);
-        }
+        public void SetIdle() => _animator.SetFloat(Speed, 0);
+        public void SetMove(float speed) => _animator.SetFloat(Speed, speed);
+        public void PlayThrow() => _animator.SetTrigger(Throw);
+        public void PlayDeath() => _animator.SetTrigger(Die);
+        public void PlayVictory() => _animator.SetTrigger(Win);
 
-        // вызывать из Animation Event
-        public void OnThrowEvent()
-        {
-            OnThrowAnimationComplete?.Invoke();
-        }
+        public void OnThrowEvent() => OnThrowAnimationComplete?.Invoke();
     }
 }
