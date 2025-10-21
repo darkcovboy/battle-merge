@@ -18,17 +18,18 @@ namespace Game.Scripts.Battler.Player
         private readonly Transform _pokeballSpawnPoint;
         private readonly BattleZone _battleZone;
         private readonly PokeballPool _pokeballPool;
-        private readonly Transform _playerTransform;
+        private readonly Transform _ownerTransform;
 
+        public IReadOnlyList<MonsterCharacter> Monsters => _monsters;
         
-        public MonsterTeamController(MonsterFactory factory, Field field, Transform playerTransform, BattleZone battleZone, Pokeball pokeballPrefab, Transform pokeballSpawnPoint)
+        public MonsterTeamController(MonsterFactory factory, Field field, Transform ownerTransform, BattleZone battleZone, Pokeball pokeballPrefab, Transform pokeballSpawnPoint)
         {
             _factory = factory;
             _field = field;
             _battleZone = battleZone;
             _pokeballPrefab = pokeballPrefab;
             _pokeballSpawnPoint = pokeballSpawnPoint;
-            _playerTransform = playerTransform;
+            _ownerTransform = ownerTransform;
             
             var activeMonsterIds = _field.CharacterPositions
                 .Values
@@ -38,6 +39,18 @@ namespace Game.Scripts.Battler.Player
             _pokeballPool = new PokeballPool(pokeballPrefab, activeMonsterIds.Count);
             
             InitializeTeam(activeMonsterIds);
+        }
+        
+        public MonsterTeamController(MonsterFactory factory, List<string> monsterIds, Transform owner, BattleZone battleZone, Pokeball pokeballPrefab, Transform pokeballSpawnPoint)
+        {
+            _factory = factory;
+            _battleZone = battleZone;
+            _pokeballPrefab = pokeballPrefab;
+            _pokeballSpawnPoint = pokeballSpawnPoint;
+            _ownerTransform = owner;
+
+            _pokeballPool = new PokeballPool(pokeballPrefab, monsterIds.Count);
+            InitializeTeam(monsterIds);
         }
 
         private void InitializeTeam(List<string> activeMonsterIds)
@@ -86,7 +99,7 @@ namespace Game.Scripts.Battler.Player
                     var ball = _pokeballPool.Get();
                     ball.transform.position = monster.transform.position;
 
-                    ball.transform.DOJump(_playerTransform.position, 2f, 1, 0.8f)
+                    ball.transform.DOJump(_ownerTransform.position, 2f, 1, 0.8f)
                         .OnComplete(() => _pokeballPool.Release(ball));
                 });
             }

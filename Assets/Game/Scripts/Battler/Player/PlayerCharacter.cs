@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Game.Scripts.Battler.Player
 {
-    public class PlayerCharacter : MonoBehaviour
+    public class PlayerCharacter : MonoBehaviour, ICombat
     {
         [SerializeField] private PlayerView _view;
         [SerializeField] private BattleZone _battleZone;
@@ -22,6 +22,9 @@ namespace Game.Scripts.Battler.Player
         private IInput _input;
         private PlayerStateMachine _stateMachine;
         private MonsterTeamController _teamController;
+        
+        public IReadOnlyList<MonsterCharacter> Team => _teamController.Monsters;
+
 
         [Inject]
         public void Construct(IInput input, MonsterFactory factory, Field field)
@@ -37,29 +40,27 @@ namespace Game.Scripts.Battler.Player
         {
             _stateMachine.Update();
         }
-        
+
         private void OnDestroy()
         {
             _view.OnThrowAnimationComplete -= OnThrowAnimationComplete;
         }
-        
-        private void OnThrowAnimationComplete()
-        {
-            _teamController.ThrowPokeballs();
-        }
 
-        [Button]
-        public void StartBattle()
+        public void OnBattleStarted(ICombat opponent)
         {
             _input.SetBlocked(true);
             _view.PlayThrow();
         }
 
-        [Button]
-        public void EndBattle()
+        public void OnBattleEnded(bool victory)
         {
-            _teamController.ReturnMonsters();
             _input.SetBlocked(false);
+            _teamController.ReturnMonsters();
+        }
+
+        private void OnThrowAnimationComplete()
+        {
+            _teamController.ThrowPokeballs();
         }
     }
 }

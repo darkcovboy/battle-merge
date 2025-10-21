@@ -27,18 +27,13 @@ namespace Game.Scripts.Battler.Monsters.StateMachine.States
             }
             
             Vector3 dir = (target.Transform.position - _monster.Transform.position);
-            float distance = dir.magnitude;
+            dir.Normalize();
 
             if (_monster.Config.WarriorType == CharacterWarriorType.Shooter)
             {
-                float desiredDistance = _monster.Config.AttackRange * 0.8f;
-
-                if (distance <= desiredDistance)
-                {
-                    _view.SetIdle();
-                    _monster.Transform.rotation = Quaternion.LookRotation(dir.normalized);
-                    return; 
-                }
+                _monster.Transform.rotation = Quaternion.LookRotation(dir);
+                _view.SetIdle();
+                return;
             }
 
             dir.Normalize();

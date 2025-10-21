@@ -15,10 +15,9 @@ namespace Game.Scripts.App.Characters.Data
         [SerializeField] private CharacterWarriorType _warriorType;
         [SerializeField] private MonsterCharacter _monsterCharacterPrefab;
         
-        [Header("Battle Settings")]
-        [SerializeField] private float _moveSpeed = 4f;
-        [SerializeField] private float _attackRange = 1.5f;
-        [SerializeField] private float _attackCooldown = 1f;
+        private float _moveSpeed = 2f;
+        private float _attackRange = 1f;
+        private float _attackCooldown = 3f;
         
 
         

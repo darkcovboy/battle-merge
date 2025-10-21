@@ -27,9 +27,8 @@ namespace Game.Scripts.Battler.Player.Pokeballs
                 });
         }
 
-        public void ResetState()
+        private void ResetState()
         {
-            transform.localScale = Vector3.one;
             transform.rotation = Quaternion.identity;
             transform.DOKill();
         }

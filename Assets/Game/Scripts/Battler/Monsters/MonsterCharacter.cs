@@ -9,8 +9,10 @@ namespace Game.Scripts.Battler.Monsters
 {
     public class MonsterCharacter : MonoBehaviour, IMonsterTarget
     {
+        public Action<MonsterCharacter> OnDeath;
+        
         [SerializeField] private MonsterView _view;
-        [SerializeField] private GameObject _projectilePrefab;
+        [SerializeField] private MonsterShooter _shooter;
 
         private MonsterStateMachine _stateMachine;
         private IMonsterTarget _target;
@@ -24,13 +26,15 @@ namespace Game.Scripts.Battler.Monsters
         public bool IsDead => _currentHealth <= 0;
         public CharacterConfig Config => _config;
         public Transform Transform => transform;
-        public GameObject ProjectilePrefab => _projectilePrefab;
 
         private void Awake()
         {
             _originalScale = transform.localScale;
             transform.localScale = Vector3.zero;
             _stateMachine = new MonsterStateMachine(this, _view);
+            
+            if (_shooter != null)
+                _shooter.Initialize(this);
         }
 
         private void Update() => _stateMachine.Update();
@@ -65,6 +69,11 @@ namespace Game.Scripts.Battler.Monsters
         public void TakeDamage(float damage)
         {
             _currentHealth -= damage;
+
+            if (_currentHealth <= 0)
+            {
+                OnDeath?.Invoke(this);
+            }
         }
     }
 }

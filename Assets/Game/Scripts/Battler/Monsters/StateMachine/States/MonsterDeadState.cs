@@ -18,7 +18,6 @@ namespace Game.Scripts.Battler.Monsters.StateMachine.States
         public override void Enter()
         {
             _view.PlayDeath();
-            Object.Destroy(_monster.gameObject, 2f);
         }
     }
 }

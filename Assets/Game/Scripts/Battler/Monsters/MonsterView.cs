@@ -9,7 +9,6 @@ namespace Game.Scripts.Battler.Monsters
         private static readonly int Die = Animator.StringToHash("Die");
 
         [SerializeField] private Animator _animator;
-        [field:SerializeField] public Transform ProjectileSpawnPosition { get; set; }
         
 #if UNITY_EDITOR
         private void OnValidate()

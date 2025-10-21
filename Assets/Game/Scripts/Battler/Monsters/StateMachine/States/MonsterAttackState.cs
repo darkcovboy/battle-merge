@@ -25,23 +25,17 @@ namespace Game.Scripts.Battler.Monsters.StateMachine.States
             if (target == null) return;
 
             _cooldownTimer -= Time.deltaTime;
-            if (_cooldownTimer <= 0f)
+            if (_cooldownTimer > 0f)
+                return;
+
+            _view.PlayAttack();
+
+            if (_monster.Config.WarriorType == CharacterWarriorType.Fighter)
             {
-                _view.PlayAttack();
-                if (_monster.Config.WarriorType == CharacterWarriorType.Fighter)
-                    target.TakeDamage(_monster.Config.Damage);
-                else
-                    ShootProjectile(target);
-                _cooldownTimer = _monster.Config.AttackCooldown;
+                target.TakeDamage(_monster.Config.Damage);
             }
-        }
-
-        private void ShootProjectile(IMonsterTarget target)
-        {
-            if (_monster.ProjectilePrefab == null) return;
-
-            var proj = Object.Instantiate(_monster.ProjectilePrefab,
-                _view.ProjectileSpawnPosition.position, Quaternion.identity);
+            
+            _cooldownTimer = _monster.Config.AttackCooldown;
         }
     }
 }

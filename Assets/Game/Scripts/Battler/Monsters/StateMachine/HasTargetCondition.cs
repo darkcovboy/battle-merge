@@ -1,4 +1,5 @@
-﻿using Game.Scripts.Battler.Module.StateMachine;
+﻿using Game.Scripts.App.Characters.Data;
+using Game.Scripts.Battler.Module.StateMachine;
 using UnityEngine;
 
 namespace Game.Scripts.Battler.Monsters.StateMachine
@@ -18,6 +19,9 @@ namespace Game.Scripts.Battler.Monsters.StateMachine
 
         public bool IsMet()
         {
+            if (_monster.Config.WarriorType == CharacterWarriorType.Shooter)
+                return true;
+            
             var t = _monster.GetTarget();
             if (t == null) return false;
             return Vector3.Distance(_monster.Transform.position, t.Transform.position) <= _monster.Config.AttackRange;
