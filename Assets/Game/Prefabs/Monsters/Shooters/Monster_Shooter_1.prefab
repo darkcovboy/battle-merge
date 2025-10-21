@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootPoint: {fileID: 7771305492290355235}
-  _projectilePrefab: {fileID: 8276369777797826713, guid: c7045abe1e5227445b03f29f1c3e78ed, type: 3}
+  _projectilePrefab: {fileID: 4636472585772633696, guid: 96107009aeebee142bbd7920d04dfe3c, type: 3}
 --- !u!1 &264232904517587475
 GameObject:
   m_ObjectHideFlags: 0

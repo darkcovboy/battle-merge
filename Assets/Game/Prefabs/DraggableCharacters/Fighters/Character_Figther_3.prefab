@@ -81,6 +81,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
+--- !u!114 &5159855146820227680 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7476769252033238078, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
+  m_PrefabInstance: {fileID: 2331086626239923806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018bef23ad3f483bbde5c9033bdea435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9060665177964985974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765633793147238440, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
@@ -158,6 +169,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8969249539198016206, guid: 9075d192a39b4b94da09396a3d5a8717, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 4c78928b440cf4f4988afce7b2923381, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -275,6 +290,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6765633793147238440, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
   m_PrefabInstance: {fileID: 6461236188238889599}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4496912474538366529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7476769252033238078, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
+  m_PrefabInstance: {fileID: 6461236188238889599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018bef23ad3f483bbde5c9033bdea435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8174224741540937185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -283,6 +309,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 226496229473052287, guid: 37fa4299cd16e6f4fa4833fd26675966, type: 3}
+      propertyPath: _trailCharacter.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 226496229473052287, guid: 37fa4299cd16e6f4fa4833fd26675966, type: 3}
+      propertyPath: '_trailCharacter.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4496912474538366529}
+    - target: {fileID: 226496229473052287, guid: 37fa4299cd16e6f4fa4833fd26675966, type: 3}
+      propertyPath: '_trailCharacter.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5159855146820227680}
     - target: {fileID: 5128258375560473501, guid: 37fa4299cd16e6f4fa4833fd26675966, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

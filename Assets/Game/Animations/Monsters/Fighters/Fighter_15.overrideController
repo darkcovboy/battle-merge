@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Fighter_15
+  m_Controller: {fileID: 9100000, guid: 786bef592ffe6c146831598e76b04405, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 41f97b04d131f484d8c2c8ee567f6122, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4126c8d3f1f61694fb77ae51dfa0528b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 1c866140243847848a12bffd63dcd68b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: bcd79af101a95a749a31bff5221a60c0, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 82b8a97b9339f844a8d1167cb664d8b4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e04d23ed53901a9428fef67f9fb26ccb, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 2c8bcd4a342ab7b46a189c616819ca29, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 487ccdde143b48a41ad0aeb43e33115a, type: 3}

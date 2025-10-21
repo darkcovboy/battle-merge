@@ -101,6 +101,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
+--- !u!114 &5036797271021598020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7476769252033238078, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
+  m_PrefabInstance: {fileID: 2460265483008942458}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018bef23ad3f483bbde5c9033bdea435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9205571481529768274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765633793147238440, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
@@ -178,6 +189,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4788765364468757589, guid: ecb1bae1d06fb8a4ca8e26ab8edf8872, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: a6b82ff062f68fd439ea1297fa366859, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -310,6 +325,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
+--- !u!114 &833871207812611660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7476769252033238078, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
+  m_PrefabInstance: {fileID: 7804829926629681778}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018bef23ad3f483bbde5c9033bdea435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3581504515736785498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6765633793147238440, guid: a855374a22efbb24599c0bbc9fe38518, type: 3}
@@ -371,6 +397,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Shooter_6
       objectReference: {fileID: 0}
+    - target: {fileID: 8624084541060528355, guid: 5e865e42bc197664eb2fe3afdfb10057, type: 3}
+      propertyPath: _trailCharacter.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624084541060528355, guid: 5e865e42bc197664eb2fe3afdfb10057, type: 3}
+      propertyPath: '_trailCharacter.Array.data[0]'
+      value: 
+      objectReference: {fileID: 833871207812611660}
+    - target: {fileID: 8624084541060528355, guid: 5e865e42bc197664eb2fe3afdfb10057, type: 3}
+      propertyPath: '_trailCharacter.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5036797271021598020}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

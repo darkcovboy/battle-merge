@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7994060808470858394}
     m_Modifications:
+    - target: {fileID: 8388178577394852970, guid: 3bdc8c4f8fe2f2440a97db5e5f31ea6b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: a4f0af388370a1d44806de66049e30ee, type: 2}
     - target: {fileID: 8388178577404204970, guid: 3bdc8c4f8fe2f2440a97db5e5f31ea6b, type: 3}
       propertyPath: m_Name
       value: Spider3
