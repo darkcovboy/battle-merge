@@ -25,12 +25,11 @@ namespace Game.Scripts.Battler.Player
         private MonsterTeamController _teamController;
         
         public IReadOnlyList<MonsterCharacter> Team => _teamController.Monsters;
+        public MonsterTeamController TeamController => _teamController;
         public Transform Transform => transform;
         public bool IsInBattle { get; set; }
         public bool IsPlayer => true;
-
-
-
+        
         [Inject]
         public void Construct(IInput input, MonsterFactory factory, Field field)
         {

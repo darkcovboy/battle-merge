@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Battler.Battle
@@ -13,6 +14,14 @@ namespace Game.Scripts.Battler.Battle
         [SerializeField] private float _height = 2f;
 
         public ICombat Owner { get; private set; }
+        
+        private BattleController _battleController;
+
+        [Inject]
+        public void Construct(BattleController battleController)
+        {
+            _battleController = battleController;
+        }
 
 #if UNITY_EDITOR
         private void OnValidate()
@@ -38,7 +47,7 @@ namespace Game.Scripts.Battler.Battle
         {
             if (other.TryGetComponent(out BattleZone otherZone) && otherZone.Owner != null && otherZone.Owner != Owner)
             {
-                BattleController.Instance.StartBattle(Owner, otherZone.Owner);
+                _battleController.StartBattle(Owner, otherZone.Owner);
             }
         }
 

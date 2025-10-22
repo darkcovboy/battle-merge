@@ -1,24 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Scripts.Battler.Camera;
+using Game.Scripts.Battler.UI.BattleShower;
 using UnityEngine;
 
 namespace Game.Scripts.Battler.Battle
 {
-    public class BattleController : MonoBehaviour
+    public class BattleController
     {
-        public static BattleController Instance { get; private set; }
-
+        private readonly BattlerShowerPresenter _presenter;
         private readonly List<Battle> _activeBattles = new();
 
-        private void Awake()
+        public BattleController(BattlerShowerPresenter presenter)
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            Instance = this;
+            _presenter = presenter;
         }
 
         public void StartBattle(ICombat a, ICombat b)
@@ -31,8 +26,14 @@ namespace Game.Scripts.Battler.Battle
 
             battle.OnBattleEnded += HandleBattleEnded;
             battle.Start();
-
-            CameraFightController.Instance.StartFight(a.IsPlayer ? b : a);
+            
+            if (a.IsPlayer || b.IsPlayer)
+            {
+                var player = a.IsPlayer ? a : b;
+                var enemy = a.IsPlayer ? b : a;
+                _presenter.Show(player, enemy);
+                CameraFightController.Instance.StartFight(a.IsPlayer ? b : a);
+            }
         }
 
         private void HandleBattleEnded(Battle battle)

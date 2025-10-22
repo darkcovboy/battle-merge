@@ -7,6 +7,7 @@ namespace Game.Scripts.Battler.Battle
     public interface ICombat
     {
         IReadOnlyList<MonsterCharacter> Team { get; }
+        MonsterTeamController TeamController { get; }
 
         Transform Transform { get; }
         bool IsInBattle { get; set; }

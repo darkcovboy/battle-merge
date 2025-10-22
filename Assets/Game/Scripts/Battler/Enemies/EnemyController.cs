@@ -28,6 +28,7 @@ namespace Game.Scripts.Battler.Enemies
         public IReadOnlyList<MonsterCharacter> Team => _teamController.Monsters;
         public Transform Transform => transform;
         public bool IsInBattle { get; set; }
+        public MonsterTeamController TeamController => _teamController;
         public bool IsPlayer => false;
 
         [Inject]
