@@ -10,7 +10,7 @@ namespace Game.Scripts.Battler.Monsters
         [SerializeField] private TextMeshProUGUI _attackText;
 
         private MonsterTeamController _team;
-        private Camera _camera;
+        private UnityEngine.Camera _camera;
 
         private float _currentHp;
         private float _currentAttack;
@@ -18,7 +18,7 @@ namespace Game.Scripts.Battler.Monsters
         public void Initialize(MonsterTeamController team)
         {
             _team = team;
-            _camera = Camera.main;
+            _camera = UnityEngine.Camera.main;
             UpdateStats();
 
             foreach (var monster in team.Monsters)

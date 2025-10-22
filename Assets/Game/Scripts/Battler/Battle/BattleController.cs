@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Game.Scripts.Battler.Camera;
 using UnityEngine;
 
 namespace Game.Scripts.Battler.Battle
@@ -30,6 +31,8 @@ namespace Game.Scripts.Battler.Battle
 
             battle.OnBattleEnded += HandleBattleEnded;
             battle.Start();
+
+            CameraFightController.Instance.StartFight(a.IsPlayer ? b : a);
         }
 
         private void HandleBattleEnded(Battle battle)

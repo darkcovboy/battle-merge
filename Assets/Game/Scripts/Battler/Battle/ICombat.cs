@@ -10,6 +10,7 @@ namespace Game.Scripts.Battler.Battle
 
         Transform Transform { get; }
         bool IsInBattle { get; set; }
+        bool IsPlayer { get; }
 
         void OnBattleStarted(ICombat opponent);
         void OnBattleEnded(bool victory);

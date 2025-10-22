@@ -2804,6 +2804,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 394944461320007449, guid: 1b8625e320abd3e4c9a3ad23788985a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.90999985
+      objectReference: {fileID: 0}
     - target: {fileID: 2737770350777336112, guid: 1b8625e320abd3e4c9a3ad23788985a2, type: 3}
       propertyPath: m_LocalPosition.y
       value: 10.886651
@@ -2815,6 +2819,10 @@ PrefabInstance:
     - target: {fileID: 4163767434420267870, guid: 1b8625e320abd3e4c9a3ad23788985a2, type: 3}
       propertyPath: m_Name
       value: '[Camera]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6166319131799089652, guid: 1b8625e320abd3e4c9a3ad23788985a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.09
       objectReference: {fileID: 0}
     - target: {fileID: 6686936875163293119, guid: 1b8625e320abd3e4c9a3ad23788985a2, type: 3}
       propertyPath: FramingSize
