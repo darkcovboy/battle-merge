@@ -45,7 +45,8 @@ namespace Game.Scripts.Battler.Enemies
                 transform,
                 _battleZone,
                 _pokeballPrefab,
-                _pokeballSpawnPoint
+                _pokeballSpawnPoint,
+                IsPlayer
             );
 
             _view.OnThrowAnimationComplete += OnThrowAnimationComplete;

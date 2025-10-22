@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Game.Scripts.App.Characters.Data;
 using Game.Scripts.App.Characters.Menu;
+using Game.Scripts.Battler.DamageViews;
 using Game.Scripts.Battler.Monsters.StateMachine;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace Game.Scripts.Battler.Monsters
         private float _currentHealth;
         private CharacterConfig _config;
         private Transform _owner;
+        private IDamagePopupService _damagePopupService;
+        private bool _isOwnerPlayer;
         
         private Vector3 _originalScale;
         
@@ -27,6 +30,8 @@ namespace Game.Scripts.Battler.Monsters
         public Transform Transform => transform;
         public float CurrentHealth => _currentHealth;
         public float Attack => _config.Damage;
+        
+        
 
         private void Awake()
         {
@@ -40,10 +45,12 @@ namespace Game.Scripts.Battler.Monsters
 
         private void Update() => _stateMachine.Update();
 
-        public void Initialize(CharacterConfig config)
+        public void Initialize(CharacterConfig config, IDamagePopupService damagePopupService, bool isPlayer)
         {
             _config = config;
             _currentHealth = _config.Health;
+            _damagePopupService = damagePopupService;
+            _isOwnerPlayer = isPlayer;
         }
         
         public void ShowWithSpawnAnimation()
@@ -70,6 +77,8 @@ namespace Game.Scripts.Battler.Monsters
         public void TakeDamage(float damage)
         {
             _currentHealth -= damage;
+            
+            _damagePopupService.ShowDamage(transform.position, damage, _isOwnerPlayer);
 
             if (_currentHealth <= 0)
             {

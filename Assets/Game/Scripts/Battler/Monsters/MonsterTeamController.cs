@@ -13,7 +13,6 @@ namespace Game.Scripts.Battler.Monsters
         private readonly MonsterFactory _factory;
         private readonly Field _field;
         private readonly List<MonsterCharacter> _monsters = new();
-        private readonly Pokeball _pokeballPrefab;
         private readonly Transform _pokeballSpawnPoint;
         private readonly BattleZone _battleZone;
         private readonly PokeballPool _pokeballPool;
@@ -21,12 +20,11 @@ namespace Game.Scripts.Battler.Monsters
 
         public IReadOnlyList<MonsterCharacter> Monsters => _monsters;
         
-        public MonsterTeamController(MonsterFactory factory, Field field, Transform ownerTransform, BattleZone battleZone, Pokeball pokeballPrefab, Transform pokeballSpawnPoint)
+        public MonsterTeamController(MonsterFactory factory, Field field, Transform ownerTransform, BattleZone battleZone, Pokeball pokeballPrefab, Transform pokeballSpawnPoint, bool isPlayer)
         {
             _factory = factory;
             _field = field;
             _battleZone = battleZone;
-            _pokeballPrefab = pokeballPrefab;
             _pokeballSpawnPoint = pokeballSpawnPoint;
             _ownerTransform = ownerTransform;
             
@@ -37,26 +35,25 @@ namespace Game.Scripts.Battler.Monsters
             
             _pokeballPool = new PokeballPool(pokeballPrefab, activeMonsterIds.Count);
             
-            InitializeTeam(activeMonsterIds);
+            InitializeTeam(activeMonsterIds,isPlayer);
         }
         
-        public MonsterTeamController(MonsterFactory factory, List<string> monsterIds, Transform owner, BattleZone battleZone, Pokeball pokeballPrefab, Transform pokeballSpawnPoint)
+        public MonsterTeamController(MonsterFactory factory, List<string> monsterIds, Transform owner, BattleZone battleZone, Pokeball pokeballPrefab, Transform pokeballSpawnPoint, bool isPlayer)
         {
             _factory = factory;
             _battleZone = battleZone;
-            _pokeballPrefab = pokeballPrefab;
             _pokeballSpawnPoint = pokeballSpawnPoint;
             _ownerTransform = owner;
 
             _pokeballPool = new PokeballPool(pokeballPrefab, monsterIds.Count);
-            InitializeTeam(monsterIds);
+            InitializeTeam(monsterIds,isPlayer);
         }
 
-        private void InitializeTeam(List<string> activeMonsterIds)
+        private void InitializeTeam(List<string> activeMonsterIds, bool isPlayerOwner)
         {
             foreach (var id in activeMonsterIds)
             {
-                var monster = _factory.Create(Vector3.zero, id);
+                var monster = _factory.Create(Vector3.zero, id, isPlayerOwner);
                 monster.gameObject.SetActive(false);
                 _monsters.Add(monster);
             }

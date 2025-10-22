@@ -35,7 +35,13 @@ namespace Game.Scripts.Battler.Player
         {
             _input = input;
             _stateMachine = new PlayerStateMachine(_view, _input);
-            _teamController = new MonsterTeamController(factory, field, transform, _battleZone, _pokeballPrefab, _view.PokeballPosition);
+            _teamController = new MonsterTeamController(factory, 
+                field, 
+                transform, 
+                _battleZone, 
+                _pokeballPrefab, 
+                _view.PokeballPosition, 
+                IsPlayer);
 
             _teamStatsView.Initialize(_teamController);
             _view.OnThrowAnimationComplete += OnThrowAnimationComplete;
