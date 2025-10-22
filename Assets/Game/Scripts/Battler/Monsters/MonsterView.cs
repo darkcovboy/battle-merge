@@ -20,7 +20,12 @@ namespace Game.Scripts.Battler.Monsters
 
         public void SetIdle() => _animator.SetFloat(Speed, 0);
         public void SetMove(float speed) => _animator.SetFloat(Speed, speed);
-        public void PlayAttack() => _animator.SetTrigger(Attack);
+        public void PlayAttack()
+        {
+            Debug.Log("Trigger attack " + gameObject.name);
+            _animator.SetTrigger(Attack);
+        }
+
         public void PlayDeath() => _animator.SetTrigger(Die);
 
     }

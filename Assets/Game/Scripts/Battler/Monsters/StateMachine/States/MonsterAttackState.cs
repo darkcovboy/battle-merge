@@ -25,6 +25,7 @@ namespace Game.Scripts.Battler.Monsters.StateMachine.States
             if (target == null) return;
 
             _cooldownTimer -= Time.deltaTime;
+            
             if (_cooldownTimer > 0f)
                 return;
 

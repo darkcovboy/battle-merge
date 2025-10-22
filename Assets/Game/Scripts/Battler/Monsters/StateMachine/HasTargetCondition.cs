@@ -37,6 +37,8 @@ namespace Game.Scripts.Battler.Monsters.StateMachine
         {
             var t = _monster.GetTarget();
             if (t == null) return false;
+            if (_monster.Config.WarriorType == CharacterWarriorType.Shooter)
+                return false;
             return Vector3.Distance(_monster.Transform.position, t.Transform.position) > _monster.Config.AttackRange;
         }
     }
