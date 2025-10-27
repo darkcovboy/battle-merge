@@ -37,7 +37,6 @@ namespace Game.Scripts.Battler.Enemies.StateMachine
                 case EnemyStateType.Dead: _stateMachine.ChangeState(_dead); break;
                 case EnemyStateType.Victory: _stateMachine.ChangeState(_victory); break;
             }
-
         }
         public enum EnemyStateType
         {

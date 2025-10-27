@@ -10,6 +10,7 @@ namespace Game.Scripts.Battler.Enemies
         private static readonly int Die = Animator.StringToHash("Die");
         private static readonly int Win = Animator.StringToHash("Win");
 
+        [SerializeField] private CharacterController _characterController;
         [SerializeField] private Animator _animator;
         [field: SerializeField] public Transform PokeballPosition { get; private set; }
 
@@ -23,6 +24,10 @@ namespace Game.Scripts.Battler.Enemies
         }
 #endif
 
+        public void Move(Vector3 targetPos)
+        {
+            _characterController.Move(targetPos);
+        }
         public void SetIdle() => _animator.SetFloat(Speed, 0);
         public void SetMove(float speed) => _animator.SetFloat(Speed, speed);
         public void PlayThrow() => _animator.SetTrigger(Throw);

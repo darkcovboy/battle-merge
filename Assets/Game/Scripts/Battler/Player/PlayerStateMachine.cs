@@ -14,6 +14,7 @@ namespace Game.Scripts.Battler.Player
         private readonly IInput _input;
         private readonly PlayerIdleState _idleState;
         private readonly PlayerMoveState _moveState;
+        private readonly PlayerDeadState _deadState;
 
 
         public PlayerStateMachine(PlayerView playerView, IInput input)
@@ -22,6 +23,7 @@ namespace Game.Scripts.Battler.Player
             
             _idleState = new PlayerIdleState(_stateMachine, playerView);
             _moveState = new PlayerMoveState(_stateMachine, playerView, _input);
+            _deadState = new PlayerDeadState(_stateMachine, playerView);
 
             _stateMachine.AddTransition(_idleState, _moveState, new BoolCondition(()=> _input.GetInputDirection().magnitude > 0.1f));
             _stateMachine.AddTransition(_moveState, _idleState, new BoolCondition(()=> _input.GetInputDirection().magnitude <= 0.1f));
@@ -33,5 +35,21 @@ namespace Game.Scripts.Battler.Player
         {
             _stateMachine.Update();
         }
+
+        public void Enter(PlayerStateType playerStateType)
+        {
+            switch (playerStateType)
+            {
+                case PlayerStateType.Dead:
+                    _stateMachine.ChangeState(_deadState);
+                    break;
+            }
+        }
+    }
+    
+    public enum PlayerStateType
+    {
+        Dead,
+        Victory
     }
 }

@@ -53,7 +53,7 @@ namespace Game.Scripts.Infrastructure.Loader
             while (_isLoading)
             {
                 float progress = _operation.Progress;
-                //_loadingScreen.SetProgress(progress);
+                _loadingScreen.SetProgress(progress);
                 await UniTask.Yield();
             }
         }

@@ -20,6 +20,7 @@ namespace Game.Scripts.Infrastructure.Loader
 
             while (!asyncOperation.isDone)
             {
+                _loadingScreen.SetProgress(asyncOperation.progress);
                 await UniTask.Yield();
             }
             

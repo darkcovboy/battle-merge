@@ -5,6 +5,7 @@ using Game.Scripts.Battler.Battle;
 using Game.Scripts.Battler.Input;
 using Game.Scripts.Battler.Monsters;
 using Game.Scripts.Battler.Player.Pokeballs;
+using Game.Scripts.Battler.StateGame;
 using Game.Scripts.Menu.Field;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace Game.Scripts.Battler.Player
         private IInput _input;
         private PlayerStateMachine _stateMachine;
         private MonsterTeamController _teamController;
+        private MatchStateService _matchStateService;
         
         public IReadOnlyList<MonsterCharacter> Team => _teamController.Monsters;
         public MonsterTeamController TeamController => _teamController;
@@ -31,7 +33,7 @@ namespace Game.Scripts.Battler.Player
         public bool IsPlayer => true;
         
         [Inject]
-        public void Construct(IInput input, MonsterFactory factory, Field field)
+        private void Construct(IInput input, MonsterFactory factory, Field field, MatchStateService matchStateService)
         {
             _input = input;
             _stateMachine = new PlayerStateMachine(_view, _input);
@@ -45,6 +47,7 @@ namespace Game.Scripts.Battler.Player
 
             _teamStatsView.Initialize(_teamController);
             _view.OnThrowAnimationComplete += OnThrowAnimationComplete;
+            _matchStateService = matchStateService;
         }
 
         private void Update()
@@ -66,9 +69,14 @@ namespace Game.Scripts.Battler.Player
 
         public void OnBattleEnded(bool victory)
         {
-            _input.SetBlocked(false);
+            _input.SetBlocked(!victory);
             _teamController.ReturnMonsters();
-            _teamStatsView.gameObject.SetActive(true);
+            _teamStatsView.gameObject.SetActive(victory);
+            if (!victory)
+            {
+                _matchStateService.OnPlayerDied(new PlayerEvent());
+                _stateMachine.Enter(PlayerStateType.Dead);
+            }
         }
 
         private void OnThrowAnimationComplete()

@@ -30,7 +30,8 @@ namespace Game.Scripts.Battler.Enemies.StateMachine.States
             if (_changeDirTimer <= 0f)
                 PickNewDirection();
 
-            _enemy.transform.position += _targetDir * (_speed * Time.deltaTime);
+            Vector3 moveDirection = _targetDir * (_speed * Time.deltaTime);
+            _view.Move(moveDirection);
             _view.SetMove(_speed);
 
             if (_targetDir != Vector3.zero)

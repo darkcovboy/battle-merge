@@ -7,10 +7,12 @@ namespace Game.Scripts.Battler.Player
     {
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Throw = Animator.StringToHash("Throw");
-        
+        private static readonly int Lose = Animator.StringToHash("Lose");
+
         public event Action OnThrowAnimationComplete;
 
-        
+
+        [SerializeField] private CharacterController _characterController;
         [SerializeField] private Animator _animator;
         [SerializeField] private float _speed = 6f;
         [SerializeField] private Transform _pokeballPosition;
@@ -21,6 +23,11 @@ namespace Game.Scripts.Battler.Player
         public void SetIdle()
         {
             _animator.SetFloat(Speed, 0);
+        }
+
+        public void SetDead()
+        {
+            _animator.SetTrigger(Lose);
         }
         
         public void PlayThrow()
@@ -48,7 +55,8 @@ namespace Game.Scripts.Battler.Player
             Quaternion targetRotation = Quaternion.LookRotation(dirNormalized);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
 
-            transform.position += dirNormalized * (Time.deltaTime * _speed);
+            Vector3 move = dirNormalized * (Time.deltaTime * _speed);
+            _characterController.Move(move);
         }
     }
 }
