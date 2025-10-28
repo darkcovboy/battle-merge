@@ -4,6 +4,10 @@ using Zenject;
 
 namespace Game.Scripts.App.Localisation
 {
+    [CreateAssetMenu(
+        fileName = "LocalisationInstaller",
+        menuName = "Zenject/New LocalisationInstaller"
+    )]
     public class LocalisationInstaller : ScriptableObjectInstaller
     {
         [field:SerializeField] public Language Language { get; private set; }
