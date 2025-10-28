@@ -1,7 +1,11 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Game.Scripts.App.Ads;
+using Game.Scripts.App.GameScenes;
+using Game.Scripts.App.GameScenes.GameReward;
 using Game.Scripts.Battler.StateGame;
 using Game.Scripts.Infrastructure.Loader;
+using Game.Scripts.Modules.Currency;
 using UniRx;
 
 namespace Game.Scripts.Battler.UI.Lose
@@ -10,15 +14,19 @@ namespace Game.Scripts.Battler.UI.Lose
     {
         private readonly LoseScreenView _view;
         private readonly MatchStateService _matchStateService;
-        private readonly SceneLoader _sceneLoader;
+        private readonly RewardManager _rewardManager;
+        private readonly GameSceneManager _gameSceneManager;
+        private readonly CurrencyBank _currencyBank;
         private readonly CompositeDisposable _disposables = new();
 
 
-        public LoseScreenPresenter(LoseScreenView view, MatchStateService matchStateService, SceneLoader sceneLoader)
+        public LoseScreenPresenter(LoseScreenView view, MatchStateService matchStateService, RewardManager rewardManager, GameSceneManager gameSceneManager, CurrencyBank currencyBank)
         {
             _view = view;
             _matchStateService = matchStateService;
-            _sceneLoader = sceneLoader;
+            _rewardManager = rewardManager;
+            _gameSceneManager = gameSceneManager;
+            _currencyBank = currencyBank;
             _view.OnContinueButtonClicked += OnContinueButtonClicked;
             _view.OnRewardButtonClicked += OnRewardButtonClicked;
 
@@ -35,14 +43,24 @@ namespace Game.Scripts.Battler.UI.Lose
             _view.OnRewardButtonClicked -= OnRewardButtonClicked;
         }
 
-        public void OnLose(LoseReason reason) => _view.Show();
+        public void OnLose(LoseReason reason)
+        {
+            _view.SetValue(_rewardManager.CalculateLevelReward(_matchStateService.EnemiesKilled.Value).Coins);
+            _view.Show();
+        }
 
         private async void OnRewardButtonClicked()
         {
             await UniTask.Delay(2000);
-            _sceneLoader.LoadSceneAsync("Menu").Forget();
+            _gameSceneManager.LoseLevel();
         }
 
-        private void OnContinueButtonClicked() => _sceneLoader.LoadSceneAsync("Menu").Forget();
+        private void OnContinueButtonClicked()
+        {
+            _currencyBank.GetCell(CurrencyType.COIN)
+                .Add(_rewardManager.CalculateLevelReward(_matchStateService.EnemiesKilled.Value).Coins);
+            AdsManager.Instance.ShowInterstitialAd();
+            _gameSceneManager.LoseLevel();
+        }
     }
 }

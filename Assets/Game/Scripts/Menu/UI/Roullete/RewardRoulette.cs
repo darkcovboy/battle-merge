@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts.App.Ads;
 using Game.Scripts.Modules.Currency;
 using Game.Scripts.Modules.SaveLoad;
+using Game.Scripts.Useful.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,17 +29,24 @@ namespace Game.Scripts.Menu.UI.Roullete
         [SerializeField]
         private Sprite[] _multiplierSprites;
         
-        private List<int> _currentMultipliers = new List<int>();
         private int _multiplier;
         
         private CurrencyBank _bank;
         private GameSaveLoader _gameSaveLoader;
+        private Coroutine _coroutine;
+
+        private float _incomeValue;
 
         [Inject]
         private void Construct(CurrencyBank currencyBank, GameSaveLoader gameSaveLoader)
         {
             _bank = currencyBank;
             _gameSaveLoader = gameSaveLoader;
+        }
+
+        public void SetValue(float income)
+        {
+            _incomeValue = income;
         }
 
         private void OnEnable()
@@ -46,60 +56,49 @@ namespace Game.Scripts.Menu.UI.Roullete
         
         private void StartRoulette()
         {
-            _currentMultipliers.Clear();
-            _currentMultipliers.AddRange(_multipliers);
-            
             _animator.enabled = true;
-            _multiplierTexts[0].SetText(_currentMultipliers[0] + "X");
-            _multiplierTexts[1].SetText(_currentMultipliers[1] + "X");
-            _multiplierTexts[2].SetText(_currentMultipliers[2] + "X");
-            _multiplierTexts[3].SetText(_currentMultipliers[3] + "X");
-            _multiplierTexts[4].SetText(_currentMultipliers[2] + "X");
-            _multiplierTexts[5].SetText(_currentMultipliers[1] + "X");
-            _multiplierTexts[6].SetText(_currentMultipliers[0] + "X");
         }
 
         public void OnButtonClicked()
         {
-            OnShowReward();
-            //Добавить ревард
+            AdsManager.Instance.ShowRewardedAd(OnShowReward);
             _animator.enabled = false;
         }
 
         private void OnShowReward()
         {
-            //добавляем деньгу
-            //_gameSaveLoader.Save();
+            var income = _incomeValue * _multiplier;
+            _bank.GetCell(CurrencyType.COIN).Add(income);
+            _gameSaveLoader.Save();
         }
         
         public void OnX5()
         {
-            _multiplier = _currentMultipliers[0];
+            _multiplier = _multipliers[0];
             UpdateView();
         }
 
         public void OnX10()
         {
-            _multiplier = _currentMultipliers[1];
+            _multiplier = _multipliers[1];
             UpdateView();
         }
 
         public void OnX15()
         {
-            _multiplier = _currentMultipliers[2];
+            _multiplier = _multipliers[2];
             UpdateView();
         }
 
         public void OnX20()
         {
-            _multiplier = _currentMultipliers[3];
+            _multiplier = _multipliers[3];
             UpdateView();
         }
 
         private void UpdateView()
         {
-            //Добавить расчет инкома
-            _multiplierText.text = $"+{(_multiplier/* * _gameRewardManager.CalculatedIncome.Value*/).ToString("##.#")}";
+            _multiplierText.text = $"+{(_multiplier * _incomeValue).ToShortString()}";
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Game.Scripts.Modules.Currency
         {
             foreach (var currencyData in service)
             {
-                service.GetCell(currencyData.Type).Change(500);
+                service.GetCell(currencyData.Type).Change(currencyData.Type == CurrencyType.COIN ? 200 : 0);
             }
         }
     }

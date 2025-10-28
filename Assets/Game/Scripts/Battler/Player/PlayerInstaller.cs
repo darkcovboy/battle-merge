@@ -26,16 +26,6 @@ namespace Game.Scripts.Battler.Player
             Container.Bind<CharacterConfigCatalog>().FromInstance(_characterConfigCatalog).AsSingle();
 
             Container.Bind<MonsterFactory>().AsSingle().NonLazy();
-            
-            Container.BindInterfacesAndSelfTo<GameSaveLoader>().AsSingle();
-
-            Container.Bind<IGameSerializer[]>().FromMethod((context) =>
-            {
-                return new IGameSerializer[]
-                {
-                    context.Container.Instantiate<FieldSerializer>()
-                };
-            }).AsSingle();
         }
     }
 }

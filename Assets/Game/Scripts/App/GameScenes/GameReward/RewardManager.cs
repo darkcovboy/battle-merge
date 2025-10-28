@@ -14,7 +14,7 @@ namespace Game.Scripts.App.GameScenes.GameReward
             _gameSceneManager = gameSceneManager;
         }
         
-        public RewardData CalculateLevelReward(int enemyCount)
+        public RewardData CalculateLevelReward(float enemyCount)
         {
             var cycle = _gameSceneManager.CycleIndex;
             var difficultyMultiplier = _gameSceneManager.GetCycleMultiplier();

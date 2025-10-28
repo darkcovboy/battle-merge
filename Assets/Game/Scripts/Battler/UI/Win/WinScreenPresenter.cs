@@ -1,5 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Game.Scripts.App.Ads;
+using Game.Scripts.App.GameScenes;
+using Game.Scripts.App.GameScenes.GameReward;
 using Game.Scripts.Battler.StateGame;
 using Game.Scripts.Infrastructure.Loader;
 using UniRx;
@@ -10,15 +13,17 @@ namespace Game.Scripts.Battler.UI.Win
     {
         private readonly WinScreenView _view;
         private readonly MatchStateService _matchStateService;
-        private readonly SceneLoader _sceneLoader;
+        private readonly GameSceneManager _gameSceneManager;
+        private readonly RewardManager _rewardManager;
         private readonly CompositeDisposable _disposables = new();
 
 
-        public WinScreenPresenter(WinScreenView view, MatchStateService matchStateService, SceneLoader sceneLoader)
+        public WinScreenPresenter(WinScreenView view, MatchStateService matchStateService, GameSceneManager gameSceneManager, RewardManager rewardManager)
         {
             _view = view;
             _matchStateService = matchStateService;
-            _sceneLoader = sceneLoader;
+            _gameSceneManager = gameSceneManager;
+            _rewardManager = rewardManager;
             _view.OnContinueButtonClicked += OnContinueButtonClicked;
             _view.OnRewardButtonClicked += OnRewardButtonClicked;
 
@@ -35,18 +40,23 @@ namespace Game.Scripts.Battler.UI.Win
             _view.OnRewardButtonClicked -= OnRewardButtonClicked;
         }
 
-        public void OnWin(WinReason reason) => _view.Show();
+        public void OnWin(WinReason reason)
+        {
+            RewardData rewardData = _rewardManager.CalculateLevelReward(_matchStateService.EnemiesKilled.Value);
+            _view.SetValue(rewardData.Coins,rewardData.Gems);
+            _view.Show();
+        }
 
         private async void OnRewardButtonClicked()
         {
             await UniTask.Delay(2000);
-            _sceneLoader.LoadSceneAsync("Menu").Forget();
+            _gameSceneManager.CompleteLevel();
         }
 
         private void OnContinueButtonClicked()
         {
-            //Показать интер
-            _sceneLoader.LoadSceneAsync("Menu").Forget();
+            AdsManager.Instance.ShowInterstitialAd();
+            _gameSceneManager.CompleteLevel();
         }
     }
 }

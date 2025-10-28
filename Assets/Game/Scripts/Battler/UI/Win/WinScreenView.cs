@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using Game.Scripts.Menu.UI.Roullete;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +11,9 @@ namespace Game.Scripts.Battler.UI.Win
     {
         public Action OnContinueButtonClicked;
         public Action OnRewardButtonClicked;
-        
+
+        [SerializeField] private GameObject _diamondsObject;
+        [SerializeField] private TextMeshProUGUI _diamondsText;
         [SerializeField] private RewardRoulette _rewardRoulette;
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _rewardButton;
@@ -24,6 +28,13 @@ namespace Game.Scripts.Battler.UI.Win
         {
             _continueButton.onClick.RemoveListener(ContinueButtonClicked);
             _rewardButton.onClick.RemoveListener(RewardButtonClicked);
+        }
+        
+        public void SetValue(float income, float diamondsValue)
+        {
+            _rewardRoulette.SetValue(income);
+            _diamondsText.text = $"+{diamondsValue.ToString(CultureInfo.InvariantCulture)}";
+            _diamondsObject.SetActive(diamondsValue > 0);
         }
 
         public void Show()

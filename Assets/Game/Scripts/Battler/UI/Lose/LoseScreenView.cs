@@ -26,6 +26,11 @@ namespace Game.Scripts.Battler.UI.Lose
             _rewardButton.onClick.RemoveListener(RewardButtonClicked);
         }
 
+        public void SetValue(float income)
+        {
+            _rewardRoulette.SetValue(income);
+        }
+
         public void Show()
         {
             gameObject.SetActive(true);

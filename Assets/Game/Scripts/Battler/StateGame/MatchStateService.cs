@@ -12,12 +12,19 @@ namespace Game.Scripts.Battler.StateGame
 
         private readonly ReactiveProperty<GameResult> _result = new(GameResult.None);
         public IReadOnlyReactiveProperty<GameResult> Result => _result;
+        private readonly ReactiveProperty<int> _enemiesKilled = new(0);
+        private readonly ReactiveProperty<int> _totalEnemies = new(0);
+
         
         private int _aliveEnemies;
         private bool _bossAlive;
         private bool _finished;
 
         private readonly CompositeDisposable _disposables = new();
+        
+        public IReadOnlyReactiveProperty<int> EnemiesKilled => _enemiesKilled;
+        public IReadOnlyReactiveProperty<int> TotalEnemies => _totalEnemies;
+
 
         public MatchStateService()
         {
@@ -26,6 +33,7 @@ namespace Game.Scripts.Battler.StateGame
                 .Subscribe(e =>
                 {
                     _aliveEnemies++;
+                    _totalEnemies.Value++;
                     if (e.IsBoss) _bossAlive = true;
                 })
                 .AddTo(_disposables);
@@ -34,6 +42,7 @@ namespace Game.Scripts.Battler.StateGame
                 .Where(_ => !_finished)
                 .Subscribe(e =>
                 {
+                    _enemiesKilled.Value++;
                     if (e.IsBoss)
                     {
                         _bossAlive = false;

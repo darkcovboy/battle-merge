@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c3060093b5d684047a11461e7f1e59d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 680770631571494267}
   - component: {fileID: 4777866702248210301}
   - component: {fileID: 1076061887637324222}
+  - component: {fileID: 2479840340122825420}
   m_Layer: 5
   m_Name: Roulette
   m_TagString: Untagged
@@ -317,6 +318,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2479840340122825420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2279907053453217957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb85801ae1a4ef38513392f81a9ea5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1076061887637324222}
+  _multiplierText: {fileID: 3025109370178959094}
+  _multipliers: 02000000030000000400000005000000
+  _multiplierTexts:
+  - {fileID: 6429920817725859064}
+  - {fileID: 3634867264831947295}
+  - {fileID: 8608871342236346139}
+  - {fileID: 1237894569885612417}
+  - {fileID: 1393718571984459186}
+  - {fileID: 3379675279781416408}
+  - {fileID: 1026860153828867037}
+  _multiplierSprites: []
 --- !u!1 &2854037910358418644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1143,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1624483161035980778}
-  - component: {fileID: 2303496795938097999}
   m_Layer: 5
   m_Name: Roulette
   m_TagString: Untagged
@@ -1147,32 +1171,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 726, y: 331}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2303496795938097999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6715125187677001715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffb85801ae1a4ef38513392f81a9ea5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1076061887637324222}
-  _multiplierText: {fileID: 3025109370178959094}
-  _rewardButton: {fileID: 0}
-  _multipliers: 02000000030000000400000005000000
-  _multiplierTexts:
-  - {fileID: 6429920817725859064}
-  - {fileID: 3634867264831947295}
-  - {fileID: 8608871342236346139}
-  - {fileID: 1237894569885612417}
-  - {fileID: 1393718571984459186}
-  - {fileID: 3379675279781416408}
-  - {fileID: 1026860153828867037}
-  _multiplierSprites: []
-  _adIcon: {fileID: 0}
 --- !u!1 &6730203108708514989
 GameObject:
   m_ObjectHideFlags: 0

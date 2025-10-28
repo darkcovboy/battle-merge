@@ -1,12 +1,15 @@
 ﻿using System;
 using Game.Scripts.App.GameScenes.Data;
+using Game.Scripts.Infrastructure.Loader;
 using UnityEngine;
 
 namespace Game.Scripts.App.GameScenes
 {
     public class GameSceneManager
     {
+        private const string SceneName = "Menu";
         private readonly GameSceneConfig _config;
+        private readonly SceneLoader _sceneLoader;
         private int _currentLevel;
         private int _uiLevel;
 
@@ -17,9 +20,10 @@ namespace Game.Scripts.App.GameScenes
         public int RealLevelIndex => ((_currentLevel - 1) % _config.TotalUniqueLevels) + 1;
         public bool IsBossLevel => _currentLevel % _config.BossLevelInterval == 0;
 
-        public GameSceneManager(GameSceneConfig config)
+        public GameSceneManager(GameSceneConfig config, SceneLoader sceneLoader)
         {
             _config = config;
+            _sceneLoader = sceneLoader;
         }
 
         public void Setup(int currentIndex, int currentUILevel)
@@ -32,6 +36,13 @@ namespace Game.Scripts.App.GameScenes
         {
             _currentLevel++;
             _uiLevel++;
+
+            _sceneLoader.LoadSceneAsync(SceneName).Forget();
+        }
+
+        public void LoseLevel()
+        {
+            _sceneLoader.LoadSceneAsync(SceneName).Forget();
         }
 
         public float GetCycleMultiplier()

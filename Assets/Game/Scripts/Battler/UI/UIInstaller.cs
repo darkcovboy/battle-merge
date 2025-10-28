@@ -15,8 +15,8 @@ namespace Game.Scripts.Battler.UI
             Container.Bind<LoseScreenView>().FromInstance(_loseScreenView).AsSingle();
             Container.Bind<WinScreenView>().FromInstance(_winScreenView).AsSingle();
 
-            //Container.BindInterfacesAndSelfTo<WinScreenPresenter>().AsSingle().NonLazy();
-           // Container.BindInterfacesAndSelfTo<LoseScreenPresenter>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<WinScreenPresenter>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<LoseScreenPresenter>().AsSingle().NonLazy();
         }
     }
 }
