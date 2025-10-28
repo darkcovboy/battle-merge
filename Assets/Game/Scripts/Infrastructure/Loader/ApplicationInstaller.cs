@@ -16,7 +16,6 @@ namespace Game.Scripts.Infrastructure.Loader
     
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<Field>().AsSingle();
             this.Container.BindInterfacesAndSelfTo<GameLauncher>()
                 .AsSingle()
                 .WithArguments(_loadingOperation)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Scripts.Menu.Field;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts.App.Characters.Data
@@ -15,6 +16,7 @@ namespace Game.Scripts.App.Characters.Data
         {
             _characterConfigCatalog.Init();
             Container.Bind<CharacterConfigCatalog>().FromInstance(_characterConfigCatalog).AsSingle();
+            Container.Bind<Field>().AsSingle();
         }
     }
 }

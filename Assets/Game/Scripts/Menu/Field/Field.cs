@@ -9,7 +9,6 @@ namespace Game.Scripts.Menu.Field
         
         public void Setup(Dictionary<int, string> dataItems)
         {
-            Debug.Log("Setup");
             CharacterPositions = dataItems;
         }
     }

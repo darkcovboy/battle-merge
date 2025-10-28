@@ -18,7 +18,6 @@ namespace Game.Scripts.Menu
 
         public override void InstallBindings()
         {
-            Container.Bind<SceneLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<TutorialService>().AsSingle();
             Container.BindInterfacesAndSelfTo<BuyButtonCharacterPresenter>().AsSingle().WithArguments(_buyButtonCharacterViews);
             Container.BindInterfacesAndSelfTo<CharacterUnlockService>().AsSingle();
