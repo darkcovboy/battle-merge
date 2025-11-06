@@ -15,4 +15,4 @@ MonoBehaviour:
   _musicMixer: {fileID: 24100000, guid: 085d6a9bb69d22b4ca25a1ce53297972, type: 2}
   _sfxMixer: {fileID: 24100000, guid: 4fbab6e1df2014745a190f23a028c61c, type: 2}
   _musicParam: Volume
-  _sfxParam: Volume
+  _sfxParam: Master
