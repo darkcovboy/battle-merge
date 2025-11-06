@@ -19409,6 +19409,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 667909f725e5401c96486c70a40fd920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectsToHide:
+  - {fileID: 1980816357}
+  - {fileID: 1472332719}
+  - {fileID: 93556154}
   _rewardRoulette: {fileID: 3490817718419273809}
   _continueButton: {fileID: 1898021798}
   _rewardButton: {fileID: 1786174604}
@@ -19679,6 +19683,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4cbe85228d445e8fe60dd2d923097c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectsToHide:
+  - {fileID: 1980816357}
+  - {fileID: 1472332719}
+  - {fileID: 93556154}
   _diamondsObject: {fileID: 1036477489}
   _diamondsText: {fileID: 452951347}
   _rewardRoulette: {fileID: 854906143}
@@ -20567,7 +20575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -20.231514, y: -5.08}
+  m_AnchoredPosition: {x: -20.231567, y: -5.08}
   m_SizeDelta: {x: -29.569214, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1740904156

@@ -12,6 +12,7 @@ namespace Game.Scripts.Battler.UI.Win
         public Action OnContinueButtonClicked;
         public Action OnRewardButtonClicked;
 
+        [SerializeField] private GameObject[] _objectsToHide;
         [SerializeField] private GameObject _diamondsObject;
         [SerializeField] private TextMeshProUGUI _diamondsText;
         [SerializeField] private RewardRoulette _rewardRoulette;
@@ -39,6 +40,10 @@ namespace Game.Scripts.Battler.UI.Win
 
         public void Show()
         {
+            foreach (var hideObject in _objectsToHide)
+            {
+                hideObject.SetActive(false);
+            }
             gameObject.SetActive(true);
         }
 

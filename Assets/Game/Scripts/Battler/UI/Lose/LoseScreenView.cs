@@ -10,6 +10,7 @@ namespace Game.Scripts.Battler.UI.Lose
         public Action OnContinueButtonClicked;
         public Action OnRewardButtonClicked;
         
+        [SerializeField] private GameObject[] _objectsToHide;
         [SerializeField] private RewardRoulette _rewardRoulette;
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _rewardButton;
@@ -33,6 +34,11 @@ namespace Game.Scripts.Battler.UI.Lose
 
         public void Show()
         {
+            foreach (var hideObject in _objectsToHide)
+            {
+                hideObject.SetActive(false);
+            }
+            
             gameObject.SetActive(true);
         }
 
