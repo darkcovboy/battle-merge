@@ -3,6 +3,7 @@ using Game.Scripts.Infrastructure.Loader;
 using Game.Scripts.Menu.BuyButtons;
 using Game.Scripts.Menu.CharacterUnlock;
 using Game.Scripts.Menu.MenuInput;
+using Game.Scripts.Menu.UI.Shop;
 using Game.Scripts.Modules.Tutorial;
 using UnityEngine;
 using Zenject;
@@ -22,6 +23,7 @@ namespace Game.Scripts.Menu
             Container.BindInterfacesAndSelfTo<BuyButtonCharacterPresenter>().AsSingle().WithArguments(_buyButtonCharacterViews);
             Container.BindInterfacesAndSelfTo<CharacterUnlockService>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameEventMediator>().AsSingle();
+            Container.Bind<SkinService>().AsSingle();
             MenuInputInstaller.Install(Container,_mainCamera);
             SaveLoadMenuInstaller.Install(Container);
         }

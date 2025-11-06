@@ -3,6 +3,7 @@ using DG.Tweening;
 using Game.Scripts.App.Characters.Menu;
 using Game.Scripts.Menu.Field.CellScripts;
 using Game.Scripts.Menu.MenuInput;
+using Game.Scripts.Useful.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,7 +32,7 @@ namespace Game.Scripts.Menu.UI.CharacterInfo
             _originalPosition = _rectTransform.anchoredPosition;
             
             _hiddenPosition = _originalPosition;
-            _hiddenPosition.x = -Screen.width +_rectTransform.rect.width;
+            _hiddenPosition.x = -Screen.width * 2f +_rectTransform.rect.width;
             _rectTransform.anchoredPosition = _hiddenPosition;
         }
 
@@ -61,8 +62,8 @@ namespace Game.Scripts.Menu.UI.CharacterInfo
             _rectTransform.DOKill();
 
             _characterInfoProperties.Icon.sprite = draggableCharacter.Config.Icon;
-            _characterInfoProperties.DamageText.text = draggableCharacter.Config.Damage.ToString();
-            _characterInfoProperties.HealthText.text = draggableCharacter.Config.Health.ToString();
+            _characterInfoProperties.DamageText.text = draggableCharacter.Config.Damage.ToShortString();
+            _characterInfoProperties.HealthText.text = draggableCharacter.Config.Health.ToShortString();
 
             _rectTransform.DOAnchorPos(_originalPosition, _animationDuration)
                 .SetEase(_appearEase);

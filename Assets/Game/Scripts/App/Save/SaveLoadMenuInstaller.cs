@@ -23,6 +23,7 @@ namespace Game.Scripts.App.Save
                     context.Container.Instantiate<FieldSerializer>(),
                     context.Container.Instantiate<CharacterUnlockSerializer>(),
                     context.Container.Instantiate<GameScenesSerializer>(),
+                    context.Container.Instantiate<SkinSerializer>()
                 };
             }).AsSingle();
         }

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ec2e065b26432896d95a34ceb55077, type: 3}
+  m_Name: Hero View Config Holder
+  m_EditorClassIdentifier: 
+  Skins:
+  - Id: 0
+    Icon: {fileID: 21300000, guid: 1622221176ec5c9439ace12aa1dccbdd, type: 3}
+    Price: 0
+    ModelPrefab: {fileID: -6086809875670911607, guid: b469b722974c7a5409375aec3e6737fe, type: 3}
+  - Id: 1
+    Icon: {fileID: 21300000, guid: 8b3f3be82188f1540905e74276ec8e3a, type: 3}
+    Price: 50
+    ModelPrefab: {fileID: -5793107215787696625, guid: b7c17e9174268414dbf5cbdca6030137, type: 3}
+  - Id: 2
+    Icon: {fileID: 21300000, guid: 1d086a6e15763b94c81ac0a9d6c74488, type: 3}
+    Price: 50
+    ModelPrefab: {fileID: 1047672048873803788, guid: 4ab00803a31b66f4baddd29a286827d2, type: 3}
+  - Id: 3
+    Icon: {fileID: 21300000, guid: 7f8420469d907a743bc6f7852302fff8, type: 3}
+    Price: 50
+    ModelPrefab: {fileID: -4189726422181497266, guid: 30c720ee7921a3048b91e2214fbe9d4d, type: 3}
+  - Id: 4
+    Icon: {fileID: 21300000, guid: 3c08106789a233b47981e05281ecca74, type: 3}
+    Price: 75
+    ModelPrefab: {fileID: -4520940631276946092, guid: 0dd1de22010b96b49be3754c8f3c0d48, type: 3}
+  - Id: 5
+    Icon: {fileID: 21300000, guid: e5bcce23193269e47bd57a7ade30f32b, type: 3}
+    Price: 100
+    ModelPrefab: {fileID: 2174225421170188938, guid: 621b3b075b912524395b3a6c7765fe87, type: 3}

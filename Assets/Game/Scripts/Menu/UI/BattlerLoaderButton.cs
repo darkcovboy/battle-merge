@@ -11,15 +11,21 @@ namespace Game.Scripts.Menu.UI
         [SerializeField] private Button _button;
 
         private SceneLoader _sceneLoader;
+        
         [Inject]
-        public void Cosntruct(SceneLoader sceneLoader)
+        private void Construct(SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
         }
 
         private void Start()
         {
-            _button.onClick.AddListener(()=> _sceneLoader.LoadSceneAsync("Gameplay"));
+            _button.onClick.AddListener(()=> _sceneLoader.LoadSceneAsync("Gameplay").Forget());
+        }
+
+        private void OnDestroy()
+        {
+            _button.onClick.RemoveAllListeners();
         }
     }
 }
