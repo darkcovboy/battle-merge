@@ -17,6 +17,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2071439395080110346
+      type: {class: StartGameOperation, ns: Game.Scripts.Infrastructure, asm: Assembly-CSharp}
+      data: 
     - rid: 2719749863223853123
       type: {class: LoadingOperationSequence, ns: Game.Scripts.Modules.LoadingTree, asm: Assembly-CSharp}
       data:
@@ -30,6 +33,10 @@ MonoBehaviour:
           weight: 1
           operation:
             rid: 2719750088780677187
+        - off: 0
+          weight: 1
+          operation:
+            rid: 2071439395080110346
         showDebug: 1
     - rid: 2719750088780677187
       type: {class: LoadSaveOperation, ns: Game.Scripts.Infrastructure.Loader, asm: Assembly-CSharp}

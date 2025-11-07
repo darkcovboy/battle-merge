@@ -5,6 +5,7 @@ namespace Game.Scripts.Infrastructure.Loader
 {
     public class SceneLoader
     {
+        private StartGameOperation _startGameOperation = new();
         private readonly LoadingScreen.LoadingScreen _loadingScreen;
 
         public SceneLoader(LoadingScreen.LoadingScreen loadingScreen)
@@ -23,6 +24,8 @@ namespace Game.Scripts.Infrastructure.Loader
                 _loadingScreen.SetProgress(asyncOperation.progress);
                 await UniTask.Yield();
             }
+
+            await _startGameOperation.Run(null);
             
             _loadingScreen.Hide();
         }

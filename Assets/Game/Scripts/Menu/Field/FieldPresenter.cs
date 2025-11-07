@@ -17,7 +17,7 @@ using Object = UnityEngine.Object;
 
 namespace Game.Scripts.Menu.Field
 {
-    public class FieldPresenter : IInitializable, IDisposable, IFieldPresenter
+    public class FieldPresenter : IInitializable, IDisposable, IFieldPresenter, IReady
     {
         private readonly FieldView _fieldView;
         private readonly CellFactory _cellFactory;
@@ -35,6 +35,8 @@ namespace Game.Scripts.Menu.Field
         
         private Cell _lastHoveredCell;
         private bool _isBoardFull;
+
+        private bool _isInit = false;
 
 
         public FieldPresenter(FieldView fieldView,
@@ -148,6 +150,9 @@ namespace Game.Scripts.Menu.Field
                     AddCharacter(_characterConfigCatalog.CharacterConfigs.Find(x=> x.NameId == CharacterPositions[i]).NameId, i);
                 }
             }
+
+            await UniTask.WaitForSeconds(0.2f);
+            _isInit = true;
         }
 
         private bool CanPlaceOrMerge(Cell cell, IDraggableCharacter character)
@@ -267,6 +272,11 @@ namespace Game.Scripts.Menu.Field
         private bool CanMerge(int id, string characterId) =>
             _characterConfigCatalog.GetNext(_draggableCharacters[id].Config) != null &&
             CharacterPositions[id].Equals(characterId);
+
+        public bool IsReady()
+        {
+            return _isInit;
+        }
     }
 
     public interface IFieldPresenter

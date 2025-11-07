@@ -7,6 +7,7 @@ namespace Game.Scripts.Menu.UI.Shop
 {
     public class ShopInstaller : MonoInstaller
     {
+        [SerializeField] private FloatingNotification _floatingNotification;
         [SerializeField] private HeroCardView _prefab;
         [SerializeField] private ShopView _shopView;
         [SerializeField] private HeroViewConfigHolder _config;
@@ -14,6 +15,7 @@ namespace Game.Scripts.Menu.UI.Shop
 
         public override void InstallBindings()
         {
+            Container.Bind<FloatingNotification>().FromInstance(_floatingNotification).AsSingle();
             Container.Bind<HeroCardView>().FromInstance(_prefab).AsSingle();
             Container.Bind<ShopView>().FromInstance(_shopView).AsSingle();
             Container.Bind<HeroViewConfigHolder>().FromInstance(_config).AsSingle();

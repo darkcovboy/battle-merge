@@ -19,6 +19,7 @@ namespace Game.Scripts.Menu.UI.Shop
         private readonly SkinPlacement _skinPlacement;
         private readonly GameSaveLoader _gameSaveLoader;
         private readonly SkinService _skinService;
+        private readonly FloatingNotification _floatingNotification;
         private readonly CurrencyCell _currencyCell;
         private List<HeroCardView> _cards = new();
         
@@ -31,7 +32,8 @@ namespace Game.Scripts.Menu.UI.Shop
             SkinPlacement skinPlacement,
             GameSaveLoader gameSaveLoader,
             SkinService skinService,
-            CurrencyBank currencyBank)
+            CurrencyBank currencyBank,
+            FloatingNotification floatingNotification)
         {
             _view = view;
             _configHolder = configHolder;
@@ -39,6 +41,7 @@ namespace Game.Scripts.Menu.UI.Shop
             _skinPlacement = skinPlacement;
             _gameSaveLoader = gameSaveLoader;
             _skinService = skinService;
+            _floatingNotification = floatingNotification;
             _currencyCell = currencyBank.GetCell(CurrencyType.DIAMONDS);
 
             _view.OnBuyClicked += OnBuyClicked;
@@ -124,8 +127,7 @@ namespace Game.Scripts.Menu.UI.Shop
 
             if (!_currencyCell.Exists(config.Price))
             {
-                Debug.Log("[SHOP] Not enough currency!");
-                // можно тут вызвать popup или disable кнопку
+                _floatingNotification.ShowNotification();
                 return;
             }
 
